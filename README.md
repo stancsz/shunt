@@ -1,4 +1,9 @@
-# Shunt
+<img src="docs/branding/shunt-logo.png" alt="Shunt — local coding-task router" width="640">
+
+[![Status: prototype](docs/branding/badge-status.svg)](docs/production-readiness-review.md)
+[![API formats: 7](docs/branding/badge-api.svg)](docs/api.md)
+[![Runtime: NVIDIA CUDA](docs/branding/badge-runtime.svg)](#windows-powershell-setup)
+[![Verified checks: 93 passed](docs/branding/badge-checks.svg)](docs/evals/seven-api-validation.md)
 
 Shunt is a **local coding-task router** that recommends which of three model tiers should handle a request. It uses a small LoRA adapter on **Qwen/Qwen3.5-0.8B** to score task complexity, then applies rules for scope, risk, ambiguity, and retries. Your application receives the recommendation and chooses what to do next.
 
