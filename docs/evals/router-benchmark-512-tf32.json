@@ -1,0 +1,16 @@
+{
+  "n": 1000,
+  "p50_ms": 22.586200037039816,
+  "p95_ms": 23.516500019468367,
+  "p99_ms": 23.98099994752556,
+  "max_probability_difference_vs_adapter_eager": 0.00010368463163457076,
+  "same_semantic_winners": true,
+  "safety_overrides_passed": true,
+  "bucket_tokens": 512,
+  "semantic_accuracy_repeated_fixture": 0.944,
+  "hardware": "NVIDIA GeForce RTX 5070 Ti",
+  "mode": "merged BF16 LoRA + CUDA graph",
+  "inspection_p95_ms": 0.813300022855401,
+  "scope": "warm Python AST fixture inspection + prompt/tokenization/GPU/lexical-policy/JSON",
+  "limitations": "36 synthetic prompts repeated; one small warm Python file; scope count overrides exercise policy; no load, graph setup, concurrency, or real task acceptance"
+}

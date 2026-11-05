@@ -1,0 +1,25 @@
+services:
+  shunt:
+    build: .
+    ports:
+      - "127.0.0.1:${SHUNT_DOCKER_PORT:-18765}:18765"
+    environment:
+      SHUNT_HOST: 0.0.0.0
+      SHUNT_PORT: 18765
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - shunt-models:/app/models
+      - shunt-artifacts:/app/artifacts
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  shunt-models:
+  shunt-artifacts:

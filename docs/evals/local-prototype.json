@@ -1,0 +1,111 @@
+{
+  "base-eval": {
+    "adapter": null,
+    "n": 36,
+    "accuracy": 0.6666666666666666,
+    "confusion_true_rows": [
+      [
+        0,
+        12,
+        0
+      ],
+      [
+        0,
+        12,
+        0
+      ],
+      [
+        0,
+        0,
+        12
+      ]
+    ],
+    "warm_scoring_p50_ms": 67.56559992209077,
+    "warm_scoring_p95_ms": 76.48369995877147,
+    "latency_scope": "tokenization + model + softmax; not full AC-4 acceptance",
+    "data_scope": "held-out synthetic intent templates; not real target execution",
+    "device": "NVIDIA GeForce RTX 5070 Ti"
+  },
+  "shunt-eval": {
+    "adapter": "artifacts/shunt-lora",
+    "n": 36,
+    "accuracy": 0.9444444444444444,
+    "confusion_true_rows": [
+      [
+        12,
+        0,
+        0
+      ],
+      [
+        2,
+        10,
+        0
+      ],
+      [
+        0,
+        0,
+        12
+      ]
+    ],
+    "warm_scoring_p50_ms": 84.12220003083348,
+    "warm_scoring_p95_ms": 99.93279993068427,
+    "latency_scope": "tokenization + model + softmax; not full AC-4 acceptance",
+    "data_scope": "held-out synthetic intent templates; not real target execution",
+    "device": "NVIDIA GeForce RTX 5070 Ti"
+  },
+  "router-benchmark": {
+    "n": 1000,
+    "p50_ms": 15.452399966306984,
+    "p95_ms": 16.193400020711124,
+    "p99_ms": 16.64149994030595,
+    "max_probability_difference_vs_adapter_eager": 0.00010676150671495854,
+    "same_semantic_winners": true,
+    "safety_overrides_passed": true,
+    "bucket_tokens": 256,
+    "semantic_accuracy_repeated_fixture": 0.944,
+    "hardware": "NVIDIA GeForce RTX 5070 Ti",
+    "mode": "merged BF16 LoRA + CUDA graph",
+    "inspection_p95_ms": 0.7977000204846263,
+    "scope": "warm Python AST fixture inspection + prompt/tokenization/GPU/lexical-policy/JSON",
+    "limitations": "36 synthetic prompts repeated; one small warm Python file; scope count overrides exercise policy; no load, graph setup, concurrency, or real task acceptance"
+  },
+  "adapter": {
+    "path": "artifacts/shunt-lora/adapter_model.safetensors",
+    "bytes": 18716576,
+    "sha256": "bd2c76d87f7adc1600146697e6c5f84be1dfbf94fac658197b9d8bdd2263f450"
+  },
+  "base_revision": "2fc06364715b967f1860aea9cf38778875588b17",
+  "training": {
+    "base": "Qwen/Qwen3.5-0.8B",
+    "seed": 42,
+    "epochs": 3,
+    "batch_size": 4,
+    "rank": 8,
+    "alpha": 16,
+    "learning_rate": 0.0002,
+    "training_seconds": 45.96321990003344,
+    "history": [
+      {
+        "epoch": 1,
+        "mean_loss": 0.4875171696610718
+      },
+      {
+        "epoch": 2,
+        "mean_loss": 9.139290714049113e-06
+      },
+      {
+        "epoch": 3,
+        "mean_loss": 1.298607105371519e-06
+      }
+    ],
+    "supervision": "synthetic authored policy labels; not execution outcomes",
+    "data_sha256": "18fefd8294175e4d5f94065797f4291d7ffae40f0861ca4f8b0adaa276189639",
+    "prompt_sha256": "9fc322d0d42c8c7bdd6411d1666ee381cd727616021229a9a42b36134ed202ea",
+    "label_token_ids": [
+      32,
+      33,
+      34
+    ],
+    "torch": "2.11.0+cu128"
+  }
+}

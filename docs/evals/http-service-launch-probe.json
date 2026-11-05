@@ -1,0 +1,83 @@
+{
+  "review_date": "2026-11-05",
+  "verdict": "READY",
+  "scope": "local-only prototype launch",
+  "service": "http://127.0.0.1:18765",
+  "python": "C:/Users/stanc/github/shunt/.venv/Scripts/python.exe",
+  "http_observations": [
+    {
+      "name": "health_initial",
+      "method": "GET",
+      "path": "/health",
+      "status": 200,
+      "body": {"status": "ready", "adapter": "artifacts/shunt-lora", "max_prompt_tokens": 512, "calibrated": false, "mode": "cuda_graph"}
+    },
+    {
+      "name": "syntax_inference",
+      "method": "POST",
+      "path": "/route",
+      "status": 200,
+      "request": {"task": "syntax", "file_count": 1, "ast_lines": 12},
+      "route": "qwen-3.8-27B",
+      "probabilities": {"qwen-3.8-27B": 0.9999995658144567, "minimax-3.1-flash": 3.9278618400594716e-7, "terra-6.1": 4.139935921284059e-8},
+      "calibrated": false,
+      "backbone": "Qwen/Qwen3.5-0.8B",
+      "adapter": "artifacts/shunt-lora"
+    },
+    {
+      "name": "retry_escalation_inference",
+      "method": "POST",
+      "path": "/route",
+      "status": 200,
+      "request": {"task": "syntax", "file_count": 1, "ast_lines": 12, "attempt_count": 2},
+      "route": "terra-6.1",
+      "overrides": {"circuit_breaker": true, "structural_floor": 3}
+    },
+    {
+      "name": "negative_scope_rejection",
+      "method": "POST",
+      "path": "/route",
+      "status": 422,
+      "request": {"task": "syntax", "file_count": -1, "ast_lines": 12},
+      "body": {"error": "file_count must be a nonnegative integer or None"}
+    },
+    {
+      "name": "repeated_word_overflow",
+      "method": "POST",
+      "path": "/route",
+      "status": 422,
+      "request_description": "task contains 2000 repetitions of the word repeat",
+      "body": {"error": "Task exceeds 512-token CUDA graph bucket"}
+    },
+    {
+      "name": "health_final",
+      "method": "GET",
+      "path": "/health",
+      "status": 200,
+      "body": {"status": "ready", "adapter": "artifacts/shunt-lora", "max_prompt_tokens": 512, "calibrated": false, "mode": "cuda_graph"}
+    }
+  ],
+  "socket": {"evidence": "netstat -ano -p tcp", "local_address": "127.0.0.1", "local_port": 18765, "state": "LISTENING", "pid": 25308, "wildcard_bind": false, "process_executable_and_command": "unverified: Windows process inspection was denied"},
+  "restart_entrypoint": {
+    "documented_command": "$env:PYTHONPATH='.'; .venv/Scripts/python.exe -m shunt.server --cuda-graph",
+    "cwd": "C:/Users/stanc/github/shunt",
+    "check": ".venv/Scripts/python.exe -m shunt.server --help",
+    "result": "success; server.py usage/options displayed; no model loaded and no service started",
+    "same_entrypoint": true
+  },
+  "sha256": {
+    "shunt/server.py": "F2708DBB619D75A619319D530FE4F78A9C35A0BB27F8E52ECA509E0F1F21E9C4",
+    "shunt/model.py": "4B0A5377B5A117D1CA234FE901446F43BB253534BB0ACD2700F3282F37CB1C5F",
+    "shunt/graph.py": "8BEF7DB2E3792C3D600D44A4E2BD5FE2DFFDF917C7D94E100DC77D916FE979CB",
+    "shunt/policy.py": "8A5E09A4D742498A3B11B5BB2E4A8A65C779890A7CCF029EC57078E3F7DC3252",
+    "artifacts/shunt-lora/adapter_config.json": "37D1DBBE85AAF4B629C923E8A66D9A0C54229E2CCABC0DEE5D01297BB484C72D"
+  },
+  "limits": [
+    "No public deployment acceptance",
+    "No automatic restart; documented restart checked with --help only",
+    "No accuracy or latency acceptance",
+    "Endpoint is unauthenticated and caller-declared scope is not independently verified",
+    "Routes are recommendations; endpoint does not execute target models",
+    "Listening process command line could not be inspected"
+  ]
+}

@@ -1,0 +1,216 @@
+{"task": "Fix a missing closing parenthesis in inventory.", "label": 0, "family": "train-0-0", "source": "authored synthetic policy supervision"}
+{"task": "Fix a missing closing parenthesis in reports.", "label": 0, "family": "train-0-0", "source": "authored synthetic policy supervision"}
+{"task": "Fix a missing closing parenthesis in catalog.", "label": 0, "family": "train-0-0", "source": "authored synthetic policy supervision"}
+{"task": "Fix a missing closing parenthesis in profiles.", "label": 0, "family": "train-0-0", "source": "authored synthetic policy supervision"}
+{"task": "Fix a missing closing parenthesis in notifications.", "label": 0, "family": "train-0-0", "source": "authored synthetic policy supervision"}
+{"task": "Fix a missing closing parenthesis in bookmarks.", "label": 0, "family": "train-0-0", "source": "authored synthetic policy supervision"}
+{"task": "Normalize whitespace in inventory.", "label": 0, "family": "train-0-1", "source": "authored synthetic policy supervision"}
+{"task": "Normalize whitespace in reports.", "label": 0, "family": "train-0-1", "source": "authored synthetic policy supervision"}
+{"task": "Normalize whitespace in catalog.", "label": 0, "family": "train-0-1", "source": "authored synthetic policy supervision"}
+{"task": "Normalize whitespace in profiles.", "label": 0, "family": "train-0-1", "source": "authored synthetic policy supervision"}
+{"task": "Normalize whitespace in notifications.", "label": 0, "family": "train-0-1", "source": "authored synthetic policy supervision"}
+{"task": "Normalize whitespace in bookmarks.", "label": 0, "family": "train-0-1", "source": "authored synthetic policy supervision"}
+{"task": "Add a docstring explaining inventory.", "label": 0, "family": "train-0-2", "source": "authored synthetic policy supervision"}
+{"task": "Add a docstring explaining reports.", "label": 0, "family": "train-0-2", "source": "authored synthetic policy supervision"}
+{"task": "Add a docstring explaining catalog.", "label": 0, "family": "train-0-2", "source": "authored synthetic policy supervision"}
+{"task": "Add a docstring explaining profiles.", "label": 0, "family": "train-0-2", "source": "authored synthetic policy supervision"}
+{"task": "Add a docstring explaining notifications.", "label": 0, "family": "train-0-2", "source": "authored synthetic policy supervision"}
+{"task": "Add a docstring explaining bookmarks.", "label": 0, "family": "train-0-2", "source": "authored synthetic policy supervision"}
+{"task": "Rename a local variable in inventory.", "label": 0, "family": "train-0-3", "source": "authored synthetic policy supervision"}
+{"task": "Rename a local variable in reports.", "label": 0, "family": "train-0-3", "source": "authored synthetic policy supervision"}
+{"task": "Rename a local variable in catalog.", "label": 0, "family": "train-0-3", "source": "authored synthetic policy supervision"}
+{"task": "Rename a local variable in profiles.", "label": 0, "family": "train-0-3", "source": "authored synthetic policy supervision"}
+{"task": "Rename a local variable in notifications.", "label": 0, "family": "train-0-3", "source": "authored synthetic policy supervision"}
+{"task": "Rename a local variable in bookmarks.", "label": 0, "family": "train-0-3", "source": "authored synthetic policy supervision"}
+{"task": "Remove an unused import from inventory.", "label": 0, "family": "train-0-4", "source": "authored synthetic policy supervision"}
+{"task": "Remove an unused import from reports.", "label": 0, "family": "train-0-4", "source": "authored synthetic policy supervision"}
+{"task": "Remove an unused import from catalog.", "label": 0, "family": "train-0-4", "source": "authored synthetic policy supervision"}
+{"task": "Remove an unused import from profiles.", "label": 0, "family": "train-0-4", "source": "authored synthetic policy supervision"}
+{"task": "Remove an unused import from notifications.", "label": 0, "family": "train-0-4", "source": "authored synthetic policy supervision"}
+{"task": "Remove an unused import from bookmarks.", "label": 0, "family": "train-0-4", "source": "authored synthetic policy supervision"}
+{"task": "Write a simple test for a pure getter in inventory.", "label": 0, "family": "train-0-5", "source": "authored synthetic policy supervision"}
+{"task": "Write a simple test for a pure getter in reports.", "label": 0, "family": "train-0-5", "source": "authored synthetic policy supervision"}
+{"task": "Write a simple test for a pure getter in catalog.", "label": 0, "family": "train-0-5", "source": "authored synthetic policy supervision"}
+{"task": "Write a simple test for a pure getter in profiles.", "label": 0, "family": "train-0-5", "source": "authored synthetic policy supervision"}
+{"task": "Write a simple test for a pure getter in notifications.", "label": 0, "family": "train-0-5", "source": "authored synthetic policy supervision"}
+{"task": "Write a simple test for a pure getter in bookmarks.", "label": 0, "family": "train-0-5", "source": "authored synthetic policy supervision"}
+{"task": "Correct a misspelled comment in inventory.", "label": 0, "family": "train-0-6", "source": "authored synthetic policy supervision"}
+{"task": "Correct a misspelled comment in reports.", "label": 0, "family": "train-0-6", "source": "authored synthetic policy supervision"}
+{"task": "Correct a misspelled comment in catalog.", "label": 0, "family": "train-0-6", "source": "authored synthetic policy supervision"}
+{"task": "Correct a misspelled comment in profiles.", "label": 0, "family": "train-0-6", "source": "authored synthetic policy supervision"}
+{"task": "Correct a misspelled comment in notifications.", "label": 0, "family": "train-0-6", "source": "authored synthetic policy supervision"}
+{"task": "Correct a misspelled comment in bookmarks.", "label": 0, "family": "train-0-6", "source": "authored synthetic policy supervision"}
+{"task": "Extract a repeated literal into a local constant in inventory.", "label": 0, "family": "train-0-7", "source": "authored synthetic policy supervision"}
+{"task": "Extract a repeated literal into a local constant in reports.", "label": 0, "family": "train-0-7", "source": "authored synthetic policy supervision"}
+{"task": "Extract a repeated literal into a local constant in catalog.", "label": 0, "family": "train-0-7", "source": "authored synthetic policy supervision"}
+{"task": "Extract a repeated literal into a local constant in profiles.", "label": 0, "family": "train-0-7", "source": "authored synthetic policy supervision"}
+{"task": "Extract a repeated literal into a local constant in notifications.", "label": 0, "family": "train-0-7", "source": "authored synthetic policy supervision"}
+{"task": "Extract a repeated literal into a local constant in bookmarks.", "label": 0, "family": "train-0-7", "source": "authored synthetic policy supervision"}
+{"task": "Add type annotations to a trivial helper in inventory.", "label": 0, "family": "train-0-8", "source": "authored synthetic policy supervision"}
+{"task": "Add type annotations to a trivial helper in reports.", "label": 0, "family": "train-0-8", "source": "authored synthetic policy supervision"}
+{"task": "Add type annotations to a trivial helper in catalog.", "label": 0, "family": "train-0-8", "source": "authored synthetic policy supervision"}
+{"task": "Add type annotations to a trivial helper in profiles.", "label": 0, "family": "train-0-8", "source": "authored synthetic policy supervision"}
+{"task": "Add type annotations to a trivial helper in notifications.", "label": 0, "family": "train-0-8", "source": "authored synthetic policy supervision"}
+{"task": "Add type annotations to a trivial helper in bookmarks.", "label": 0, "family": "train-0-8", "source": "authored synthetic policy supervision"}
+{"task": "Generate a dataclass for a plain record in inventory.", "label": 0, "family": "train-0-9", "source": "authored synthetic policy supervision"}
+{"task": "Generate a dataclass for a plain record in reports.", "label": 0, "family": "train-0-9", "source": "authored synthetic policy supervision"}
+{"task": "Generate a dataclass for a plain record in catalog.", "label": 0, "family": "train-0-9", "source": "authored synthetic policy supervision"}
+{"task": "Generate a dataclass for a plain record in profiles.", "label": 0, "family": "train-0-9", "source": "authored synthetic policy supervision"}
+{"task": "Generate a dataclass for a plain record in notifications.", "label": 0, "family": "train-0-9", "source": "authored synthetic policy supervision"}
+{"task": "Generate a dataclass for a plain record in bookmarks.", "label": 0, "family": "train-0-9", "source": "authored synthetic policy supervision"}
+{"task": "Fix indentation in inventory.", "label": 0, "family": "train-0-10", "source": "authored synthetic policy supervision"}
+{"task": "Fix indentation in reports.", "label": 0, "family": "train-0-10", "source": "authored synthetic policy supervision"}
+{"task": "Fix indentation in catalog.", "label": 0, "family": "train-0-10", "source": "authored synthetic policy supervision"}
+{"task": "Fix indentation in profiles.", "label": 0, "family": "train-0-10", "source": "authored synthetic policy supervision"}
+{"task": "Fix indentation in notifications.", "label": 0, "family": "train-0-10", "source": "authored synthetic policy supervision"}
+{"task": "Fix indentation in bookmarks.", "label": 0, "family": "train-0-10", "source": "authored synthetic policy supervision"}
+{"task": "Apply lint formatting to inventory.", "label": 0, "family": "train-0-11", "source": "authored synthetic policy supervision"}
+{"task": "Apply lint formatting to reports.", "label": 0, "family": "train-0-11", "source": "authored synthetic policy supervision"}
+{"task": "Apply lint formatting to catalog.", "label": 0, "family": "train-0-11", "source": "authored synthetic policy supervision"}
+{"task": "Apply lint formatting to profiles.", "label": 0, "family": "train-0-11", "source": "authored synthetic policy supervision"}
+{"task": "Apply lint formatting to notifications.", "label": 0, "family": "train-0-11", "source": "authored synthetic policy supervision"}
+{"task": "Apply lint formatting to bookmarks.", "label": 0, "family": "train-0-11", "source": "authored synthetic policy supervision"}
+{"task": "Implement paginated CRUD endpoints for inventory.", "label": 1, "family": "train-1-0", "source": "authored synthetic policy supervision"}
+{"task": "Implement paginated CRUD endpoints for reports.", "label": 1, "family": "train-1-0", "source": "authored synthetic policy supervision"}
+{"task": "Implement paginated CRUD endpoints for catalog.", "label": 1, "family": "train-1-0", "source": "authored synthetic policy supervision"}
+{"task": "Implement paginated CRUD endpoints for profiles.", "label": 1, "family": "train-1-0", "source": "authored synthetic policy supervision"}
+{"task": "Implement paginated CRUD endpoints for notifications.", "label": 1, "family": "train-1-0", "source": "authored synthetic policy supervision"}
+{"task": "Implement paginated CRUD endpoints for bookmarks.", "label": 1, "family": "train-1-0", "source": "authored synthetic policy supervision"}
+{"task": "Add repository and service layers for inventory.", "label": 1, "family": "train-1-1", "source": "authored synthetic policy supervision"}
+{"task": "Add repository and service layers for reports.", "label": 1, "family": "train-1-1", "source": "authored synthetic policy supervision"}
+{"task": "Add repository and service layers for catalog.", "label": 1, "family": "train-1-1", "source": "authored synthetic policy supervision"}
+{"task": "Add repository and service layers for profiles.", "label": 1, "family": "train-1-1", "source": "authored synthetic policy supervision"}
+{"task": "Add repository and service layers for notifications.", "label": 1, "family": "train-1-1", "source": "authored synthetic policy supervision"}
+{"task": "Add repository and service layers for bookmarks.", "label": 1, "family": "train-1-1", "source": "authored synthetic policy supervision"}
+{"task": "Refactor inventory into cohesive modules preserving behavior.", "label": 1, "family": "train-1-2", "source": "authored synthetic policy supervision"}
+{"task": "Refactor reports into cohesive modules preserving behavior.", "label": 1, "family": "train-1-2", "source": "authored synthetic policy supervision"}
+{"task": "Refactor catalog into cohesive modules preserving behavior.", "label": 1, "family": "train-1-2", "source": "authored synthetic policy supervision"}
+{"task": "Refactor profiles into cohesive modules preserving behavior.", "label": 1, "family": "train-1-2", "source": "authored synthetic policy supervision"}
+{"task": "Refactor notifications into cohesive modules preserving behavior.", "label": 1, "family": "train-1-2", "source": "authored synthetic policy supervision"}
+{"task": "Refactor bookmarks into cohesive modules preserving behavior.", "label": 1, "family": "train-1-2", "source": "authored synthetic policy supervision"}
+{"task": "Write integration tests using the API documentation for inventory.", "label": 1, "family": "train-1-3", "source": "authored synthetic policy supervision"}
+{"task": "Write integration tests using the API documentation for reports.", "label": 1, "family": "train-1-3", "source": "authored synthetic policy supervision"}
+{"task": "Write integration tests using the API documentation for catalog.", "label": 1, "family": "train-1-3", "source": "authored synthetic policy supervision"}
+{"task": "Write integration tests using the API documentation for profiles.", "label": 1, "family": "train-1-3", "source": "authored synthetic policy supervision"}
+{"task": "Write integration tests using the API documentation for notifications.", "label": 1, "family": "train-1-3", "source": "authored synthetic policy supervision"}
+{"task": "Write integration tests using the API documentation for bookmarks.", "label": 1, "family": "train-1-3", "source": "authored synthetic policy supervision"}
+{"task": "Translate the existing inventory feature from JavaScript to Python.", "label": 1, "family": "train-1-4", "source": "authored synthetic policy supervision"}
+{"task": "Translate the existing reports feature from JavaScript to Python.", "label": 1, "family": "train-1-4", "source": "authored synthetic policy supervision"}
+{"task": "Translate the existing catalog feature from JavaScript to Python.", "label": 1, "family": "train-1-4", "source": "authored synthetic policy supervision"}
+{"task": "Translate the existing profiles feature from JavaScript to Python.", "label": 1, "family": "train-1-4", "source": "authored synthetic policy supervision"}
+{"task": "Translate the existing notifications feature from JavaScript to Python.", "label": 1, "family": "train-1-4", "source": "authored synthetic policy supervision"}
+{"task": "Translate the existing bookmarks feature from JavaScript to Python.", "label": 1, "family": "train-1-4", "source": "authored synthetic policy supervision"}
+{"task": "Add form validation and persistence for inventory.", "label": 1, "family": "train-1-5", "source": "authored synthetic policy supervision"}
+{"task": "Add form validation and persistence for reports.", "label": 1, "family": "train-1-5", "source": "authored synthetic policy supervision"}
+{"task": "Add form validation and persistence for catalog.", "label": 1, "family": "train-1-5", "source": "authored synthetic policy supervision"}
+{"task": "Add form validation and persistence for profiles.", "label": 1, "family": "train-1-5", "source": "authored synthetic policy supervision"}
+{"task": "Add form validation and persistence for notifications.", "label": 1, "family": "train-1-5", "source": "authored synthetic policy supervision"}
+{"task": "Add form validation and persistence for bookmarks.", "label": 1, "family": "train-1-5", "source": "authored synthetic policy supervision"}
+{"task": "Connect the frontend view to the backend endpoint for inventory.", "label": 1, "family": "train-1-6", "source": "authored synthetic policy supervision"}
+{"task": "Connect the frontend view to the backend endpoint for reports.", "label": 1, "family": "train-1-6", "source": "authored synthetic policy supervision"}
+{"task": "Connect the frontend view to the backend endpoint for catalog.", "label": 1, "family": "train-1-6", "source": "authored synthetic policy supervision"}
+{"task": "Connect the frontend view to the backend endpoint for profiles.", "label": 1, "family": "train-1-6", "source": "authored synthetic policy supervision"}
+{"task": "Connect the frontend view to the backend endpoint for notifications.", "label": 1, "family": "train-1-6", "source": "authored synthetic policy supervision"}
+{"task": "Connect the frontend view to the backend endpoint for bookmarks.", "label": 1, "family": "train-1-6", "source": "authored synthetic policy supervision"}
+{"task": "Extend the existing search feature with filters for inventory.", "label": 1, "family": "train-1-7", "source": "authored synthetic policy supervision"}
+{"task": "Extend the existing search feature with filters for reports.", "label": 1, "family": "train-1-7", "source": "authored synthetic policy supervision"}
+{"task": "Extend the existing search feature with filters for catalog.", "label": 1, "family": "train-1-7", "source": "authored synthetic policy supervision"}
+{"task": "Extend the existing search feature with filters for profiles.", "label": 1, "family": "train-1-7", "source": "authored synthetic policy supervision"}
+{"task": "Extend the existing search feature with filters for notifications.", "label": 1, "family": "train-1-7", "source": "authored synthetic policy supervision"}
+{"task": "Extend the existing search feature with filters for bookmarks.", "label": 1, "family": "train-1-7", "source": "authored synthetic policy supervision"}
+{"task": "Implement an adapter following existing patterns for inventory.", "label": 1, "family": "train-1-8", "source": "authored synthetic policy supervision"}
+{"task": "Implement an adapter following existing patterns for reports.", "label": 1, "family": "train-1-8", "source": "authored synthetic policy supervision"}
+{"task": "Implement an adapter following existing patterns for catalog.", "label": 1, "family": "train-1-8", "source": "authored synthetic policy supervision"}
+{"task": "Implement an adapter following existing patterns for profiles.", "label": 1, "family": "train-1-8", "source": "authored synthetic policy supervision"}
+{"task": "Implement an adapter following existing patterns for notifications.", "label": 1, "family": "train-1-8", "source": "authored synthetic policy supervision"}
+{"task": "Implement an adapter following existing patterns for bookmarks.", "label": 1, "family": "train-1-8", "source": "authored synthetic policy supervision"}
+{"task": "Move inventory helpers into a shared module and update callers.", "label": 1, "family": "train-1-9", "source": "authored synthetic policy supervision"}
+{"task": "Move reports helpers into a shared module and update callers.", "label": 1, "family": "train-1-9", "source": "authored synthetic policy supervision"}
+{"task": "Move catalog helpers into a shared module and update callers.", "label": 1, "family": "train-1-9", "source": "authored synthetic policy supervision"}
+{"task": "Move profiles helpers into a shared module and update callers.", "label": 1, "family": "train-1-9", "source": "authored synthetic policy supervision"}
+{"task": "Move notifications helpers into a shared module and update callers.", "label": 1, "family": "train-1-9", "source": "authored synthetic policy supervision"}
+{"task": "Move bookmarks helpers into a shared module and update callers.", "label": 1, "family": "train-1-9", "source": "authored synthetic policy supervision"}
+{"task": "Add CSV import and export workflows for inventory.", "label": 1, "family": "train-1-10", "source": "authored synthetic policy supervision"}
+{"task": "Add CSV import and export workflows for reports.", "label": 1, "family": "train-1-10", "source": "authored synthetic policy supervision"}
+{"task": "Add CSV import and export workflows for catalog.", "label": 1, "family": "train-1-10", "source": "authored synthetic policy supervision"}
+{"task": "Add CSV import and export workflows for profiles.", "label": 1, "family": "train-1-10", "source": "authored synthetic policy supervision"}
+{"task": "Add CSV import and export workflows for notifications.", "label": 1, "family": "train-1-10", "source": "authored synthetic policy supervision"}
+{"task": "Add CSV import and export workflows for bookmarks.", "label": 1, "family": "train-1-10", "source": "authored synthetic policy supervision"}
+{"task": "Implement cache invalidation for the standard inventory CRUD flow.", "label": 1, "family": "train-1-11", "source": "authored synthetic policy supervision"}
+{"task": "Implement cache invalidation for the standard reports CRUD flow.", "label": 1, "family": "train-1-11", "source": "authored synthetic policy supervision"}
+{"task": "Implement cache invalidation for the standard catalog CRUD flow.", "label": 1, "family": "train-1-11", "source": "authored synthetic policy supervision"}
+{"task": "Implement cache invalidation for the standard profiles CRUD flow.", "label": 1, "family": "train-1-11", "source": "authored synthetic policy supervision"}
+{"task": "Implement cache invalidation for the standard notifications CRUD flow.", "label": 1, "family": "train-1-11", "source": "authored synthetic policy supervision"}
+{"task": "Implement cache invalidation for the standard bookmarks CRUD flow.", "label": 1, "family": "train-1-11", "source": "authored synthetic policy supervision"}
+{"task": "Find the root cause of nondeterministic failures in inventory.", "label": 2, "family": "train-2-0", "source": "authored synthetic policy supervision"}
+{"task": "Find the root cause of nondeterministic failures in reports.", "label": 2, "family": "train-2-0", "source": "authored synthetic policy supervision"}
+{"task": "Find the root cause of nondeterministic failures in catalog.", "label": 2, "family": "train-2-0", "source": "authored synthetic policy supervision"}
+{"task": "Find the root cause of nondeterministic failures in profiles.", "label": 2, "family": "train-2-0", "source": "authored synthetic policy supervision"}
+{"task": "Find the root cause of nondeterministic failures in notifications.", "label": 2, "family": "train-2-0", "source": "authored synthetic policy supervision"}
+{"task": "Find the root cause of nondeterministic failures in bookmarks.", "label": 2, "family": "train-2-0", "source": "authored synthetic policy supervision"}
+{"task": "Diagnose a race condition affecting inventory.", "label": 2, "family": "train-2-1", "source": "authored synthetic policy supervision"}
+{"task": "Diagnose a race condition affecting reports.", "label": 2, "family": "train-2-1", "source": "authored synthetic policy supervision"}
+{"task": "Diagnose a race condition affecting catalog.", "label": 2, "family": "train-2-1", "source": "authored synthetic policy supervision"}
+{"task": "Diagnose a race condition affecting profiles.", "label": 2, "family": "train-2-1", "source": "authored synthetic policy supervision"}
+{"task": "Diagnose a race condition affecting notifications.", "label": 2, "family": "train-2-1", "source": "authored synthetic policy supervision"}
+{"task": "Diagnose a race condition affecting bookmarks.", "label": 2, "family": "train-2-1", "source": "authored synthetic policy supervision"}
+{"task": "Design a distributed consensus protocol for inventory.", "label": 2, "family": "train-2-2", "source": "authored synthetic policy supervision"}
+{"task": "Design a distributed consensus protocol for reports.", "label": 2, "family": "train-2-2", "source": "authored synthetic policy supervision"}
+{"task": "Design a distributed consensus protocol for catalog.", "label": 2, "family": "train-2-2", "source": "authored synthetic policy supervision"}
+{"task": "Design a distributed consensus protocol for profiles.", "label": 2, "family": "train-2-2", "source": "authored synthetic policy supervision"}
+{"task": "Design a distributed consensus protocol for notifications.", "label": 2, "family": "train-2-2", "source": "authored synthetic policy supervision"}
+{"task": "Design a distributed consensus protocol for bookmarks.", "label": 2, "family": "train-2-2", "source": "authored synthetic policy supervision"}
+{"task": "Investigate memory corruption in inventory.", "label": 2, "family": "train-2-3", "source": "authored synthetic policy supervision"}
+{"task": "Investigate memory corruption in reports.", "label": 2, "family": "train-2-3", "source": "authored synthetic policy supervision"}
+{"task": "Investigate memory corruption in catalog.", "label": 2, "family": "train-2-3", "source": "authored synthetic policy supervision"}
+{"task": "Investigate memory corruption in profiles.", "label": 2, "family": "train-2-3", "source": "authored synthetic policy supervision"}
+{"task": "Investigate memory corruption in notifications.", "label": 2, "family": "train-2-3", "source": "authored synthetic policy supervision"}
+{"task": "Investigate memory corruption in bookmarks.", "label": 2, "family": "train-2-3", "source": "authored synthetic policy supervision"}
+{"task": "Analyze a deadlock in inventory.", "label": 2, "family": "train-2-4", "source": "authored synthetic policy supervision"}
+{"task": "Analyze a deadlock in reports.", "label": 2, "family": "train-2-4", "source": "authored synthetic policy supervision"}
+{"task": "Analyze a deadlock in catalog.", "label": 2, "family": "train-2-4", "source": "authored synthetic policy supervision"}
+{"task": "Analyze a deadlock in profiles.", "label": 2, "family": "train-2-4", "source": "authored synthetic policy supervision"}
+{"task": "Analyze a deadlock in notifications.", "label": 2, "family": "train-2-4", "source": "authored synthetic policy supervision"}
+{"task": "Analyze a deadlock in bookmarks.", "label": 2, "family": "train-2-4", "source": "authored synthetic policy supervision"}
+{"task": "Design authentication boundaries for inventory.", "label": 2, "family": "train-2-5", "source": "authored synthetic policy supervision"}
+{"task": "Design authentication boundaries for reports.", "label": 2, "family": "train-2-5", "source": "authored synthetic policy supervision"}
+{"task": "Design authentication boundaries for catalog.", "label": 2, "family": "train-2-5", "source": "authored synthetic policy supervision"}
+{"task": "Design authentication boundaries for profiles.", "label": 2, "family": "train-2-5", "source": "authored synthetic policy supervision"}
+{"task": "Design authentication boundaries for notifications.", "label": 2, "family": "train-2-5", "source": "authored synthetic policy supervision"}
+{"task": "Design authentication boundaries for bookmarks.", "label": 2, "family": "train-2-5", "source": "authored synthetic policy supervision"}
+{"task": "Resolve a circular dependency involving inventory.", "label": 2, "family": "train-2-6", "source": "authored synthetic policy supervision"}
+{"task": "Resolve a circular dependency involving reports.", "label": 2, "family": "train-2-6", "source": "authored synthetic policy supervision"}
+{"task": "Resolve a circular dependency involving catalog.", "label": 2, "family": "train-2-6", "source": "authored synthetic policy supervision"}
+{"task": "Resolve a circular dependency involving profiles.", "label": 2, "family": "train-2-6", "source": "authored synthetic policy supervision"}
+{"task": "Resolve a circular dependency involving notifications.", "label": 2, "family": "train-2-6", "source": "authored synthetic policy supervision"}
+{"task": "Resolve a circular dependency involving bookmarks.", "label": 2, "family": "train-2-6", "source": "authored synthetic policy supervision"}
+{"task": "Investigate state corruption after recovery in inventory.", "label": 2, "family": "train-2-7", "source": "authored synthetic policy supervision"}
+{"task": "Investigate state corruption after recovery in reports.", "label": 2, "family": "train-2-7", "source": "authored synthetic policy supervision"}
+{"task": "Investigate state corruption after recovery in catalog.", "label": 2, "family": "train-2-7", "source": "authored synthetic policy supervision"}
+{"task": "Investigate state corruption after recovery in profiles.", "label": 2, "family": "train-2-7", "source": "authored synthetic policy supervision"}
+{"task": "Investigate state corruption after recovery in notifications.", "label": 2, "family": "train-2-7", "source": "authored synthetic policy supervision"}
+{"task": "Investigate state corruption after recovery in bookmarks.", "label": 2, "family": "train-2-7", "source": "authored synthetic policy supervision"}
+{"task": "Identify why inventory leaks memory under sustained load.", "label": 2, "family": "train-2-8", "source": "authored synthetic policy supervision"}
+{"task": "Identify why reports leaks memory under sustained load.", "label": 2, "family": "train-2-8", "source": "authored synthetic policy supervision"}
+{"task": "Identify why catalog leaks memory under sustained load.", "label": 2, "family": "train-2-8", "source": "authored synthetic policy supervision"}
+{"task": "Identify why profiles leaks memory under sustained load.", "label": 2, "family": "train-2-8", "source": "authored synthetic policy supervision"}
+{"task": "Identify why notifications leaks memory under sustained load.", "label": 2, "family": "train-2-8", "source": "authored synthetic policy supervision"}
+{"task": "Identify why bookmarks leaks memory under sustained load.", "label": 2, "family": "train-2-8", "source": "authored synthetic policy supervision"}
+{"task": "Design cryptographic key rotation for inventory.", "label": 2, "family": "train-2-9", "source": "authored synthetic policy supervision"}
+{"task": "Design cryptographic key rotation for reports.", "label": 2, "family": "train-2-9", "source": "authored synthetic policy supervision"}
+{"task": "Design cryptographic key rotation for catalog.", "label": 2, "family": "train-2-9", "source": "authored synthetic policy supervision"}
+{"task": "Design cryptographic key rotation for profiles.", "label": 2, "family": "train-2-9", "source": "authored synthetic policy supervision"}
+{"task": "Design cryptographic key rotation for notifications.", "label": 2, "family": "train-2-9", "source": "authored synthetic policy supervision"}
+{"task": "Design cryptographic key rotation for bookmarks.", "label": 2, "family": "train-2-9", "source": "authored synthetic policy supervision"}
+{"task": "Explain an intermittent production crash in inventory.", "label": 2, "family": "train-2-10", "source": "authored synthetic policy supervision"}
+{"task": "Explain an intermittent production crash in reports.", "label": 2, "family": "train-2-10", "source": "authored synthetic policy supervision"}
+{"task": "Explain an intermittent production crash in catalog.", "label": 2, "family": "train-2-10", "source": "authored synthetic policy supervision"}
+{"task": "Explain an intermittent production crash in profiles.", "label": 2, "family": "train-2-10", "source": "authored synthetic policy supervision"}
+{"task": "Explain an intermittent production crash in notifications.", "label": 2, "family": "train-2-10", "source": "authored synthetic policy supervision"}
+{"task": "Explain an intermittent production crash in bookmarks.", "label": 2, "family": "train-2-10", "source": "authored synthetic policy supervision"}
+{"task": "Determine why inventory tests fail only under parallel execution.", "label": 2, "family": "train-2-11", "source": "authored synthetic policy supervision"}
+{"task": "Determine why reports tests fail only under parallel execution.", "label": 2, "family": "train-2-11", "source": "authored synthetic policy supervision"}
+{"task": "Determine why catalog tests fail only under parallel execution.", "label": 2, "family": "train-2-11", "source": "authored synthetic policy supervision"}
+{"task": "Determine why profiles tests fail only under parallel execution.", "label": 2, "family": "train-2-11", "source": "authored synthetic policy supervision"}
+{"task": "Determine why notifications tests fail only under parallel execution.", "label": 2, "family": "train-2-11", "source": "authored synthetic policy supervision"}
+{"task": "Determine why bookmarks tests fail only under parallel execution.", "label": 2, "family": "train-2-11", "source": "authored synthetic policy supervision"}

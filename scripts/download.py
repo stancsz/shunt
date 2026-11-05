@@ -1,0 +1,7 @@
+"""Fetch the exact base revision used by the first Shunt training run."""
+from huggingface_hub import snapshot_download
+
+if __name__=='__main__':
+    print(snapshot_download('Qwen/Qwen3.5-0.8B',
+        revision='2fc06364715b967f1860aea9cf38778875588b17',
+        local_dir='models/Qwen3.5-0.8B',ignore_patterns=['*.md','*.png','*.jpg','*.gguf']))

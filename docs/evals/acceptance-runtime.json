@@ -1,0 +1,42 @@
+{
+  "n": 1000,
+  "precision_restored": true,
+  "safety_passed": true,
+  "hardware": "NVIDIA GeForce RTX 5070 Ti",
+  "bucket": 512,
+  "static_p95_ms": 2.8658000519499183,
+  "inference_p95_ms": 22.97820011153817,
+  "total_p95_ms": 25.41270002257079,
+  "by_files": {
+    "1": {
+      "static_p95_ms": 0.8322000503540039,
+      "total_p95_ms": 23.76950008329004
+    },
+    "2": {
+      "static_p95_ms": 1.144199981354177,
+      "total_p95_ms": 24.004700011573732
+    },
+    "8": {
+      "static_p95_ms": 2.9981000116094947,
+      "total_p95_ms": 25.51030006725341
+    },
+    "9": {
+      "static_p95_ms": 3.427499905228615,
+      "total_p95_ms": 26.135300053283572
+    }
+  },
+  "max_input_tokens": 502,
+  "scope": "warm batch1; real Python source files reread each request; content-keyed parsing cache; four authored prompts incl near-limit context; no concurrency/startup or downstream execution",
+  "source_sha256": {
+    "shunt/model.py": "4b0a5377b5a117d1ca234fe901446f43bb253534bb0acd2700f3282f37cb1c5f",
+    "shunt/policy.py": "8a5e09a4d742498a3b11b5bb2e4a8a65c779890a7ccf029ec57078e3f7dc3252",
+    "shunt/graph.py": "8bef7db2e3792c3d600d44a4e2bd5fe2dffdf917c7d94e100dc77d916fe979cb",
+    "shunt/scope.py": "ab296fcecf68faefa583c7efb9d21e7b9dbc4b74bdc617d0dd6d52422b889465",
+    "shunt/__main__.py": "c47d420d8bec0dcb85f28da4136e54b3ee0ab1f3d78b1e79d70cd9869aee3bb8",
+    "scripts/train.py": "ac4a799dd9518e68e39856baf94fb1dbc7ecfe1d2b38f3b4acdcc39ff2f8b14a",
+    "scripts/evaluate.py": "a7fddb604dfba9d07d897f096f68a4e59d432b35012093552dbfff0465605a9a",
+    "scripts/make_data.py": "eb03e9360dc9b5d04ae73d2f246e5444374b84267d5d7753e290d46b64d0511a",
+    "scripts/audit_router.py": "84cd7609c6a0e61f567ed26093ef9616dda4ea087a56bf6c34db875bd9724888"
+  },
+  "budgets_passed": true
+}
