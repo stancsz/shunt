@@ -58,7 +58,7 @@ The default deployment assumption is that all three execution models can be serv
 
 ## Output and integration
 
-An eligible T1 decision from the CLI or `POST /route` includes:
+An eligible T1 decision from the CLI or the `result` of `POST /v1/data/shunt/route` includes:
 
 ```json
 {

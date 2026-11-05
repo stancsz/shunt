@@ -4,7 +4,7 @@ Shunt is a **local coding-task router** that recommends which of three model tie
 
 - **Local inference:** Runs on a CUDA GPU with a locally trained adapter.
 - **Three configurable tiers:** Route routine work to `T1`, standard work to `T2`, and complex or high-risk work to `T3`.
-- **Jev-shaped HTTP API:** Send a task as `state` and a fixed coding-complexity Choice question; receive the choice, probabilities, and policy-adjusted route.
+- **Seven API formats:** Hugging Face, vLLM, Open Inference Protocol, OPA decisions, Jev System One, OpenAI Chat Completions, and Anthropic Messages. [See contracts and SDK examples](docs/api.md).
 - **Decision only:** Shunt does not invoke the recommended execution model. Its probabilities are uncalibrated, and its API supports a restricted subset of Jev's interface.
 
 **Production readiness: not established.** The trained local prototype passes its bounded runtime checks, but the held-out scenarios do not establish generalization or deployment readiness. See the [review and proposed test balance](docs/production-readiness-review.md).
@@ -23,33 +23,29 @@ The first trained adapter reached 34/36 on held-out synthetic prompts versus 24/
 
 The broader current 512-token warm acceptance run measured **25.41 ms p95 total**, with **22.98 ms inference** and **2.87 ms static processing**, across 1/2/8/9 supplied Python files. See [current acceptance and limits](docs/training.md#current-local-acceptance).
 
-## Jev-shaped decision API
+## Seven API formats
 
-TypeSafe's [Choice API](https://docs.typesafe.ai/primitives/choice) uses `state`, `model`, and named `questions`, returning named `answers` with a choice and probabilities. Shunt offers a **restricted** version at `POST /v1/systemone` for its fixed coding complexity classifier:
+One local classifier and routing policy, exposed through seven established wire formats:
+
+| Format | Endpoint |
+| --- | --- |
+| Hugging Face text classification | `POST /models/shunt` |
+| vLLM classification | `POST /classify` |
+| Open Inference Protocol HTTP/JSON | `POST /v2/models/shunt/infer` |
+| OPA decision envelope | `POST /v1/data/shunt/route` |
+| Jev System One | `POST /v1/systemone` |
+| OpenAI Chat Completions | `POST /v1/chat/completions` |
+| Anthropic Messages | `POST /v1/messages` |
+
+See the **[API guide](docs/api.md)** for every request/response contract, SDK examples, streaming, batches, scope headers and supported subsets. The custom `POST /route` endpoint has been removed. These adapters return Shunt classification and routing decisions; coding-agent model execution requires a separate gateway. OPA is a fixed decision document, and Jev remains a fixed Choice question.
+
+Try a routing decision once the service is running:
 
 ```powershell
-$body = @'
-{
-  "model": "shunt",
-  "state": "Fix a missing closing parenthesis.",
-  "questions": {
-    "difficulty": {
-      "type": "choice",
-      "instructions": "Classify the coding task by complexity.",
-      "criteria": {
-        "T1": "Small local syntax, formatting, documentation, rename, boilerplate or simple unit test.",
-        "T2": "Standard feature, CRUD, integration test, module refactor or translation of existing patterns.",
-        "T3": "Deep root-cause diagnosis, concurrency, memory corruption, security design or architecture."
-      }
-    }
-  },
-  "shunt": {"file_count": 1, "ast_lines": 12}
-}
-'@
-Invoke-RestMethod http://127.0.0.1:18765/v1/systemone -Method Post -ContentType application/json -Body $body
+Invoke-RestMethod http://127.0.0.1:18765/v1/chat/completions -Method Post -ContentType application/json -Headers @{'X-Shunt-File-Count'='1'; 'X-Shunt-Ast-Lines'='12'} -Body '{"model":"shunt","messages":[{"role":"user","content":"Fix a missing closing parenthesis."}]}'
 ```
 
-The question ID can be changed; the instructions and criteria must match the example. The response's `answers.difficulty.choice` is the raw highest-scoring tier, with uncalibrated `probabilities`. `shunt.route` is the policy-adjusted recommendation and can differ; `shunt` also contains the policy flags and public target. Omit `shunt` metadata to use the existing unknown-scope escalation. Shunt does not implement arbitrary choices, multiple questions, Score, Noul, images, Jev's confidence or usage fields, or the TypeSafe SDK contract; unsupported inputs return HTTP 422. Restart the service to load this endpoint.
+Read `choices[0].message.content` as JSON for the selected tier and target. Raw probabilities are uncalibrated; policy overrides can select a higher tier. Model identifier: `shunt`.
 
 ## Docker Compose with NVIDIA GPU
 
@@ -60,11 +56,11 @@ docker compose up --build -d
 docker compose logs -f shunt
 ```
 
-On first startup, the container downloads the pinned base model and trains the adapter on the GPU. Wait for `Shunt ready` in the logs; the image build, download and training require internet, substantial disk space and time. Docker also needs sufficient system memory in addition to GPU memory: a 3.8 GiB Docker Linux environment ran out of memory while building and training concurrently on this machine. If the container exits with code 137, check Docker/WSL memory limits and other running workloads. Named Docker volumes retain the model and adapter across container recreation. The service binds to `127.0.0.1:18765` on the host; set `SHUNT_DOCKER_PORT` in your shell or Compose `.env` before starting if that port is occupied. For example, in PowerShell: `$env:SHUNT_DOCKER_PORT='18766'; docker compose up --build -d`. Use the selected port in the requests below and in the Jev-shaped example.
+On first startup, the container downloads the pinned base model and trains the adapter on the GPU. Wait for `Shunt ready` in the logs; the image build, download and training require internet, substantial disk space and time. Docker also needs sufficient system memory in addition to GPU memory: a 3.8 GiB Docker Linux environment ran out of memory while building and training concurrently on this machine. If the container exits with code 137, check Docker/WSL memory limits and other running workloads. Named Docker volumes retain the model and adapter across container recreation. The service binds to `127.0.0.1:18765` on the host; set `SHUNT_DOCKER_PORT` in your shell or Compose `.env` before starting if that port is occupied. For example, in PowerShell: `$env:SHUNT_DOCKER_PORT='18766'; docker compose up --build -d`. Use the selected port in the requests below and in the API examples.
 
 ```sh
 curl http://127.0.0.1:18765/health
-curl -X POST http://127.0.0.1:18765/route -H 'Content-Type: application/json' -d '{"task":"Fix a missing closing parenthesis.","file_count":1,"ast_lines":12}'
+curl -X POST http://127.0.0.1:18765/v1/data/shunt/route -H 'Content-Type: application/json' -d '{"input":{"task":"Fix a missing closing parenthesis.","scope":{"file_count":1,"ast_lines":12}}}'
 docker compose down
 ```
 
@@ -92,10 +88,10 @@ In a second PowerShell window, check the service and make a routing decision:
 
 ```powershell
 Invoke-RestMethod http://127.0.0.1:18765/health
-Invoke-RestMethod http://127.0.0.1:18765/route -Method Post -ContentType application/json -Body '{"task":"Fix a missing closing parenthesis.","file_count":1,"ast_lines":12}'
+Invoke-RestMethod http://127.0.0.1:18765/v1/data/shunt/route -Method Post -ContentType application/json -Body '{"input":{"task":"Fix a missing closing parenthesis.","scope":{"file_count":1,"ast_lines":12}}}'
 ```
 
-The setup script creates `.venv`, installs pinned dependencies, downloads the pinned base model, and trains the adapter if it is missing. If `.venv` already exists, the script installs into it and may change its packages; use a dedicated environment for this repository. It reuses existing model and adapter files; they remain local and are gitignored. A clean checkout needs internet access, substantial disk space for model weights, and GPU training time: no pretrained adapter is distributed, and first-run duration depends on your connection and GPU. The tested environment is Python 3.11, CUDA 12.8 PyTorch, and an RTX 5070 Ti. Stop the server with Ctrl+C. To use the Jev-shaped endpoint, send the request above once the server is running. Ollama is optional for the suggested downstream targets; it does not run Shunt itself.
+The setup script creates `.venv`, installs pinned dependencies, downloads the pinned base model, and trains the adapter if it is missing. If `.venv` already exists, the script installs into it and may change its packages; use a dedicated environment for this repository. It reuses existing model and adapter files; they remain local and are gitignored. A clean checkout needs internet access, substantial disk space for model weights, and GPU training time: no pretrained adapter is distributed, and first-run duration depends on your connection and GPU. The tested environment is Python 3.11, CUDA 12.8 PyTorch, and an RTX 5070 Ti. Stop the server with Ctrl+C. To use any supported format, follow its request in the [API guide](docs/api.md) once the server is running. Ollama is optional for the suggested downstream targets; it does not run Shunt itself.
 
 If an interrupted download or training run leaves an incomplete directory, keep it for inspection by renaming it, then rerun setup. For example, for an incomplete base model:
 
@@ -127,10 +123,10 @@ $env:PYTHONPATH='.'
 .venv/Scripts/python.exe -m shunt.server --cuda-graph
 ```
 
-The resident process serves `GET http://127.0.0.1:18765/health` and `POST http://127.0.0.1:18765/route`. It processes one GPU request at a time and rejects prompts exceeding its 512-token bucket. Scope is caller-declared; omitted scope triggers the existing unknown-scope escalation policy. This endpoint returns a routing decision; it does not execute the selected target model. Default binding is local loopback and has no authentication.
+The resident process serves `GET http://127.0.0.1:18765/health` and the [seven decision interfaces](docs/api.md). It processes one GPU request at a time and rejects prompts exceeding its 512-token bucket. Scope is caller-declared; omitted scope triggers the existing unknown-scope escalation policy. This endpoint returns a routing decision; it does not execute the selected target model. Default binding is local loopback and has no authentication.
 
 ```powershell
-Invoke-RestMethod -Uri http://127.0.0.1:18765/route -Method Post -ContentType application/json -Body '{"task":"Fix a missing closing parenthesis.","file_count":1,"ast_lines":12}'
+Invoke-RestMethod -Uri http://127.0.0.1:18765/v1/data/shunt/route -Method Post -ContentType application/json -Body '{"input":{"task":"Fix a missing closing parenthesis.","scope":{"file_count":1,"ast_lines":12}}}'
 ```
 
 The desktop-started instance writes logs under `tmp/http-service/`; it is a background process without automatic restart. Run the command above to restart after stopping it or rebooting. HTTP smoke checks covered a syntax request, retry escalation, invalid scope, and token overflow; this is local prototype operation, not production routing acceptance.

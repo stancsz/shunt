@@ -62,6 +62,19 @@ def texts(value):
     return items
 
 
+def content_text(content):
+    if isinstance(content, list):
+        parts = []
+        for part in content:
+            if not isinstance(part, dict) or set(part) != {'type', 'text'} or part['type'] != 'text' or not isinstance(part['text'], str):
+                raise ValueError('only text content blocks are supported')
+            parts.append(part['text'])
+        return '\n'.join(parts)
+    if not isinstance(content, str):
+        raise ValueError('message content must be text')
+    return content
+
+
 def message_text(body, anthropic=False):
     messages = body.get('messages')
     if not isinstance(messages, list) or not messages:
@@ -74,16 +87,7 @@ def message_text(body, anthropic=False):
         roles = ('user', 'assistant') if anthropic else ('system', 'developer', 'user', 'assistant')
         if message.get('role') not in roles:
             raise ValueError('unsupported message role; tool messages are not supported')
-        content = message.get('content')
-        if isinstance(content, list):
-            parts = []
-            for part in content:
-                if not isinstance(part, dict) or set(part) != {'type', 'text'} or part['type'] != 'text' or not isinstance(part['text'], str):
-                    raise ValueError('only text content blocks are supported')
-                parts.append(part['text'])
-            content = '\n'.join(parts)
-        if not isinstance(content, str):
-            raise ValueError('message content must be text')
+        content = content_text(message.get('content'))
         if message['role'] == 'user':
             latest = content
     if latest is None or not latest.strip():
@@ -138,8 +142,10 @@ def dispatch(path, body, headers, scorer, settings):
             raise ValueError('exactly one task input tensor is required')
         tensor = inputs[0]
         fields(tensor, 'name shape datatype data')
+        if not isinstance(tensor.get('data'), list):
+            raise ValueError('tensor data must be an array of strings')
         tasks = texts(tensor.get('data'))
-        if tensor.get('name') != 'task' or tensor.get('datatype') != 'BYTES' or tensor.get('shape') != [len(tasks)]:
+        if tensor.get('name') != 'task' or tensor.get('datatype') != 'BYTES' or tensor.get('shape') != [len(tasks)] or any(type(x) is not int for x in tensor['shape']):
             raise ValueError('task must be a BYTES tensor with shape [batch_size]')
         parameters = body.get('parameters', {})
         if not isinstance(parameters, dict):
@@ -149,8 +155,11 @@ def dispatch(path, body, headers, scorer, settings):
             raise ValueError('use either scope headers or OIP parameters')
         scope = parameters or scope
         outputs = body.get('outputs', [{'name': x} for x in ('probabilities', 'classification', 'route')])
-        if not isinstance(outputs, list) or not outputs or any(not isinstance(x, dict) or set(x) != {'name'} or x['name'] not in ('probabilities', 'classification', 'route') for x in outputs):
+        if not isinstance(outputs, list) or not outputs or any(not isinstance(x, dict) or set(x) - {'name', 'parameters'} or x.get('name') not in ('probabilities', 'classification', 'route') for x in outputs):
             raise ValueError('outputs may select probabilities, classification, route')
+        for output in outputs:
+            if output.get('parameters', {}) not in ({}, {'binary_data': False}):
+                raise ValueError('only JSON output tensors are supported; binary_data must be false')
         if len({x['name'] for x in outputs}) != len(outputs):
             raise ValueError('duplicate output names')
         extra.update(id=body.get('id'), outputs=outputs)
@@ -176,8 +185,8 @@ def dispatch(path, body, headers, scorer, settings):
         if 'metadata' in body and not isinstance(body['metadata'], dict):
             raise ValueError('metadata must be an object')
         if kind == 'anthropic':
-            if 'system' in body and not isinstance(body['system'], (str, list)):
-                raise ValueError('system must be text or text blocks')
+            if 'system' in body:
+                content_text(body['system'])
             if 'max_tokens' not in body:
                 raise ValueError('max_tokens is required')
         for key in ('max_tokens', 'max_completion_tokens'):
@@ -198,7 +207,8 @@ def dispatch(path, body, headers, scorer, settings):
     wire_headers = {'X-Shunt-Route': ','.join(x['route'] for x in results), 'X-Shunt-Calibrated': 'false'}
     if kind == 'hf':
         labels = [[{'label': k, 'score': v} for k, v in sorted(r['probabilities'].items(), key=lambda x: -x[1])][:extra['top_k']] for r in results]
-        return Reply(labels if extra['batch'] else labels[0], wire_headers)
+        # Hugging Face's deployed-endpoint client unwraps the first batch row.
+        return Reply(labels, wire_headers)
     if kind == 'vllm':
         value = {'id': 'classify-' + ident, 'object': 'list', 'created': int(time.time()), 'model': MODEL,
                  'data': [{'index': i, 'label': max(r['probabilities'], key=r['probabilities'].get),

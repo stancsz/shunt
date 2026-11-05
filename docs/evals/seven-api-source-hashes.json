@@ -1,0 +1,12 @@
+{
+  "shunt/protocols.py": "480bad6eaee7198cd1977975604505ae6f84ab08482ae1d8060dc2b7e2af297f",
+  "shunt/decision.py": "fcb6104f4d1478feef0c4d21f507137c69a73d9da155e872c369654a8b21f1cb",
+  "shunt/systemone.py": "ce9fbd4237da34183a22aee2b9fc4d073b97da8d388b41a92e193cfb908c2231",
+  "shunt/server.py": "9c26dff495fc84fb4dcbde3429d40f07fb7d96eb235eaf94bd2d02c04fe2e6ad",
+  "tests/test_protocols.py": "ca20c2fae3b6e9d5484971315c44f9d8dff762800bce306cffacd47512e5a7af",
+  "tests/test_config.py": "89d9644efc98aded141255e48da5ffc00640ec50006786b8ed4ea2c00a11bdc1",
+  "docs/api.md": "ed6f25f00427c2e29ae2d03a5df81efe28f9fb77d871325310ff4335c84b9e86",
+  "README.md": "e33b6ae23421b77deb5bfa345585bf7de63f3714f5f629ec8b0b6d85f02ccc6d",
+  "requirements-dev.txt": "a142b19e9dc1f628069ff506b3fd0bfcf1413848ef059ab5cd0c6ff2c95db916",
+  "scripts/check_api.py": "280280cc14597bb0f81f5d6a4a0007ed3997fd754d117e000f92d93ba549b462"
+}

@@ -90,13 +90,13 @@ def test_http_uses_env_binding_and_escalated_target_with_stubbed_inference(tmp_p
     assert ready.wait(10)
     server = servers[0]
     try:
-        body = json.dumps({'task': 'format code', 'file_count': 1, 'ast_lines': 12,
-                           'attempt_count': 2}).encode()
-        request = Request(f'http://127.0.0.1:{server.server_port}/route', data=body,
+        body = json.dumps({'input': {'task': 'format code', 'scope': {'file_count': 1, 'ast_lines': 12,
+                           'attempt_count': 2}}}).encode()
+        request = Request(f'http://127.0.0.1:{server.server_port}/v1/data/shunt/route', data=body,
                           headers={'Content-Type': 'application/json'})
         with urlopen(request, timeout=5) as response:
             raw = response.read().decode()
-        result = json.loads(raw)
+        result = json.loads(raw)['result']
         assert result['route'] == 'T3'
         assert set(result['probabilities']) == {'T1', 'T2', 'T3'}
         assert result['target']['model'] == 'remote-test'
