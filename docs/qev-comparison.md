@@ -1,6 +1,6 @@
 # Qev 1.0: comparison with same-size decision models
 
-Snapshot: 12 November 2026. Qev's [OpenDecisions](https://huggingface.co/datasets/jgeuter/OpenDecisions) results use a 2,352-item development set, not a fresh independent test. Capability averages the benchmark's intelligence and calibration scores; it is not accuracy. Public-231 accuracy is a separate local diagnostic detailed below. Unless marked local, competitor scores are reported by their authors or the benchmark authors using their own serving configurations. Tables list identified comparators, not a complete ranking or proof of global state of the art. Different benchmarks cannot be subtracted.
+Snapshot: 13 November 2026. Qev's [OpenDecisions](https://huggingface.co/datasets/jgeuter/OpenDecisions) results use a 2,352-item development set, not a fresh independent test. Capability averages the benchmark's intelligence and calibration scores; it is not accuracy. Public-231 accuracy is a separate local diagnostic detailed below. Unless marked local, competitor scores are reported by their authors or the benchmark authors using their own serving configurations. Tables list identified comparators, not a complete ranking or proof of global state of the art. Different benchmarks cannot be subtracted.
 
 ## 0.8B
 
