@@ -94,6 +94,7 @@ This adds a locally reproduced task-family-matched reference alongside the stron
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Qev 1.0 0.8B | 32.40% | 1.516 | 0.753 | 0.10406 | 0 |
 | [Kev 0.8B](https://huggingface.co/jaredpalmer/kev-0.8b) | Not evaluated on this suite | — | — | — | 14,032 |
+| [StartLux 1.1 0.8B Instant](https://huggingface.co/startlux-models/StartLux-Decision-v1.1-0.8B-Instant) | Not scored; official CUDA attention kernel unavailable on this Windows runtime | — | — | — | 1,908 |
 
 ### 2B
 
@@ -102,6 +103,7 @@ This adds a locally reproduced task-family-matched reference alongside the stron
 | Qev 1.0 2B | 2B | 31.70% | 1.657 | 0.784 | 0.15145 | 0 |
 | [Decider 2B](https://huggingface.co/Mapika/decider-2b) | 2B | 39.59% local | 1.462 | 0.736 | 0.13571 | 7,391 |
 | [FLock this-that-model-1.1](https://huggingface.co/flock-io/this-that-model-1.1) | 1.88B | 77.84% local (77.5% card) | 0.609 | 0.303 | 0.06891 | 34 |
+| [StartLux 1.1 2B Instant](https://huggingface.co/startlux-models/StartLux-Decision-v1.1-2B-Instant) | Not evaluated on this suite | — | — | — | 1,071 |
 
 ### 4B
 
@@ -109,8 +111,9 @@ This adds a locally reproduced task-family-matched reference alongside the stron
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Qev 1.0 4B | 42.63% | 1.371 | 0.706 | 0.11397 | 0 |
 | [Kev 4B](https://huggingface.co/jaredpalmer/kev-4b) | Not evaluated on this suite | — | — | — | 12,499 |
+| [StartLux 1.1 4B Instant](https://huggingface.co/startlux-models/StartLux-Decision-v1.1-4B-Instant) | Not evaluated on this suite | — | — | — | 2,219 |
 
-Popularity is reported independently from measured performance. In the same Hub snapshot, StartLux 0.8B/2B/4B Instant had 1,908/1,071/2,219 downloads, and Valen Decision 1.5 2B had 161. These are monthly Hub download counts, not unique users, quality measurements, or proof of benchmark strength. Decider 2B is the only high-adoption peer measured on this suite so far. Kev and StartLux still need same-suite runs. Their results on other pinned public suites remain in the size-specific tables above.
+Popularity is reported independently from measured performance. In the same Hub snapshot, StartLux 0.8B/2B/4B Instant had 1,908/1,071/2,219 downloads, and Valen Decision 1.5 2B had 161. These are monthly Hub download counts, not unique users, quality measurements, or proof of benchmark strength. Decider 2B is the only high-adoption peer measured on this suite so far. Kev 0.8B/4B and StartLux 2B/4B remain unevaluated here. StartLux 0.8B's official Transformers backend was attempted with its required bidirectional attention: CUDA inference stopped because this Windows Torch build had no supported fused kernel, while the official backend refuses the slower quadratic CUDA math fallback. The supported CPU reference path passed the publisher's bidirectional integrity checks and returned normalized probabilities on three long prompts, but took 12.7–14.3 seconds per item; this is not a benchmark score and projects to roughly 6.3 hours for 1,710 items. No compatibility shim or causal-mode substitution was used. Its same-suite metrics remain unknown.
 
 The FLock reference uses its official single-pass TypedDecider scorer, bf16 and temperature 1.0. Decider 2B uses its native `Decider.decide` scorer, bf16 and its stored temperature. Qev scores each option separately and uses separately fitted temperatures, so probability and latency comparisons reflect both model quality and serving/scoring differences. Against Decider 2B, Qev 2B reaches only 80.06% of the peer's accuracy, below the 95% target and 5.92 pp below the 37.61% acceptance threshold; NLL, Brier and corrected ECE are also worse. A 50,000-replicate family-cluster bootstrap CI for Decider's accuracy gain is +3.10 to +12.81 pp. Decider beat Qev on 14 of 19 families, tied one and lost four. This remains one public diagnostic, not independent generalization. The 1.88B FLock model's overlap with the benchmark's 112 rule structures is unverified, and it is not popular. Newer FLock 1.2 is excluded because its card declares this exact dataset as training data.
 
