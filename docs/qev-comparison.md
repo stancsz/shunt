@@ -88,15 +88,32 @@ The separate local 2B one-pass pilot used the same 1,000 teacher-target workflow
 
 This adds a locally reproduced task-family-matched reference alongside the stronger, more widely adopted comparison candidates listed above. It is a preliminary diagnostic, not a replacement for the multi-suite comparison or an overall ranking. The pinned public test has 1,710 Choice cases across 19 generated policy families. Qev items were never used for training, calibration, prompt tuning or checkpoint choice.
 
-| Model | Weight tier | Accuracy | NLL ↓ | Brier ↓ | 15-bin ECE ↓ | HF downloads, prior month snapshot |
+### 0.8B
+
+| Model | Accuracy | NLL ↓ | Brier ↓ | 15-bin ECE ↓ | HF downloads, prior month snapshot |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Qev 1.0 0.8B | 32.40% | 1.516 | 0.753 | 0.10406 | 0 |
+| [Kev 0.8B](https://huggingface.co/jaredpalmer/kev-0.8b) | Not evaluated on this suite | — | — | — | 14,032 |
+
+### 2B
+
+| Model | Parameters | Accuracy | NLL ↓ | Brier ↓ | 15-bin ECE ↓ | HF downloads, prior month snapshot |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Qev 1.0 | 0.8B | 32.40% | 1.516 | 0.753 | 0.104 | 0 |
-| Qev 1.0 | 2B | 31.70% | 1.657 | 0.784 | 0.151 | 0 |
-| Qev 1.0 | 4B | 42.63% | 1.371 | 0.706 | 0.114 | 0 |
-| FLock this-that-model-1.1 | 1.88B | 77.84% local (77.5% card) | 0.609 | 0.303 | 0.00075 | 34 |
+| Qev 1.0 2B | 2B | 31.70% | 1.657 | 0.784 | 0.15145 | 0 |
+| [Decider 2B](https://huggingface.co/Mapika/decider-2b) | 2B | 39.59% local | 1.462 | 0.736 | 0.13571 | 7,391 |
+| [FLock this-that-model-1.1](https://huggingface.co/flock-io/this-that-model-1.1) | 1.88B | 77.84% local (77.5% card) | 0.609 | 0.303 | 0.06891 | 34 |
 
-Popularity is reported independently from measured performance. In the same Hub snapshot, Kev 0.8B had 14,032 downloads, Kev 4B 12,499, Decider 2B 7,391, and StartLux 0.8B/2B/4B Instant had 1,908/1,071/2,219. Valen Decision 1.5 2B had 161. These are monthly Hub download counts, not unique users, quality measurements, or proof of benchmark strength. These established candidates remain the popularity-aware peer set; their same-suite scores on This-That are not measured here. Prior sections retain their results on other pinned public suites.
+### 4B
 
-The FLock reference uses its official single-pass TypedDecider scorer, bf16 and temperature 1.0. Qev scores each option separately and uses separately fitted temperatures, so latency and probability metrics are not strictly method-matched. The 1.88B model is strong on this suite but is not popular, and its overlap with the benchmark's 112 rule structures is unverified. The newer FLock 1.2 model is excluded because its card declares this exact dataset as training data. Qev's deficits here are large, but this single suite cannot establish general rank or generalization.
+| Model | Accuracy | NLL ↓ | Brier ↓ | 15-bin ECE ↓ | HF downloads, prior month snapshot |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Qev 1.0 4B | 42.63% | 1.371 | 0.706 | 0.11397 | 0 |
+| [Kev 4B](https://huggingface.co/jaredpalmer/kev-4b) | Not evaluated on this suite | — | — | — | 12,499 |
+
+Popularity is reported independently from measured performance. In the same Hub snapshot, StartLux 0.8B/2B/4B Instant had 1,908/1,071/2,219 downloads, and Valen Decision 1.5 2B had 161. These are monthly Hub download counts, not unique users, quality measurements, or proof of benchmark strength. Decider 2B is the only high-adoption peer measured on this suite so far. Kev and StartLux still need same-suite runs. Their results on other pinned public suites remain in the size-specific tables above.
+
+The FLock reference uses its official single-pass TypedDecider scorer, bf16 and temperature 1.0. Decider 2B uses its native `Decider.decide` scorer, bf16 and its stored temperature. Qev scores each option separately and uses separately fitted temperatures, so probability and latency comparisons reflect both model quality and serving/scoring differences. Against Decider 2B, Qev 2B reaches only 80.06% of the peer's accuracy, below the 95% target and 5.92 pp below the 37.61% acceptance threshold; NLL, Brier and corrected ECE are also worse. A 50,000-replicate family-cluster bootstrap CI for Decider's accuracy gain is +3.10 to +12.81 pp. Decider beat Qev on 14 of 19 families, tied one and lost four. This remains one public diagnostic, not independent generalization. The 1.88B FLock model's overlap with the benchmark's 112 rule structures is unverified, and it is not popular. Newer FLock 1.2 is excluded because its card declares this exact dataset as training data.
+
+**ECE correction:** the first local peer report omitted bin-occupancy weighting and understated peer ECE. Correct ECE was recomputed from saved row-level probability vectors using the same occupancy-weighted 15-bin top-label formula as Qev's evaluator. FLock 1.1's ECE is 0.06891 (previously 0.00075); Decider 2B's is 0.13571 (previously 0.00109). Qev's recorded values were independently recomputed and are unchanged. Accuracy, NLL and Brier did not change.
 
 The comparison protocol and hashes are recorded in [`docs/qev-sota-goal.md`](qev-sota-goal.md#2026-11-13-local-reproduction-flock-this-that-11-diagnostic), with full local outputs in `tmp/qev-sota/this-that-decision-bench-v1/`. The next comparison step is to run the strongest runnable popular peers on each of at least three source-separated suites under frozen scoring and serving settings, then report a predeclared profile across accuracy, probability quality, coverage, selective risk, robustness, and efficiency. No tuning or training on public leaderboard items.

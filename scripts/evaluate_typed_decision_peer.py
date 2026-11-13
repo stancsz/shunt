@@ -40,7 +40,7 @@ def calibration_metrics(targets: list[int], probabilities: list[list[float]], bi
         bucket[0] += 1
         bucket[1] += confidence
         bucket[2] += int(prediction == target)
-    ece = sum(abs(conf / count - acc / count) for count, conf, acc in buckets if count) / len(targets)
+    ece = sum(abs(conf - acc) for count, conf, acc in buckets if count) / len(targets)
     return {"count": len(targets), "accuracy": correct / len(targets), "nll": nll / len(targets),
             "multiclass_brier": brier / len(targets), "top_label_ece": ece, "ece_bins": bins}
 
