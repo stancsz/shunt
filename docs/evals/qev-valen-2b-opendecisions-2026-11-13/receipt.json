@@ -1,0 +1,175 @@
+{
+  "schema": "qev-valen-opendecisions-family-paired-bootstrap-v1",
+  "dataset": {
+    "name": "OpenDecisions 1.0.1 public development set",
+    "sha256": "78614972006c5e5efbbfc121ce31e15cf576ef6c0cdf24a229b33d34d2bfcda6",
+    "rows": 2352
+  },
+  "scorer": "data/general-decision-eval/open-decisions/score.py",
+  "qev": {
+    "predictions": "docs/evals/qev-valen-2b-opendecisions-2026-11-13/qev-predictions.jsonl",
+    "sha256": "637b573144e173031a901c03239c0908fd3741a0f2b4d451f176becbd2d3c2f9",
+    "model": "Qev 1.0 2B hybrid-v2"
+  },
+  "peer": {
+    "predictions": "docs/evals/qev-valen-2b-opendecisions-2026-11-13/valen-predictions.jsonl",
+    "sha256": "f693cdabec00c1ba5aac36a66036a3339b64bf6f230e528bee73052f6945edcb",
+    "model": "Valen Decision 1.5 2B",
+    "revision": "1b890606578ba0f40bb70ed46891ab65f778e76d",
+    "model_hash_at_run": false
+  },
+  "paired": true,
+  "matching_ids": 2352,
+  "families": 11,
+  "bootstrap": {
+    "unit": "family cluster sampled with replacement",
+    "draws": 5000,
+    "seed": 20261113,
+    "interval": "percentile 95%, linearly interpolated empirical quantiles (type 7)",
+    "reported_delta": "Qev minus Valen; positive favors Qev except lower-is-better metrics"
+  },
+  "limitations": [
+    "public development benchmark; not independent final-test evidence",
+    "native prompts and inference paths differ",
+    "Valen model weights were not independently hashed at run time",
+    "family bootstrap captures sampling variability only, not protocol/source-overlap uncertainty"
+  ],
+  "point_estimates": {
+    "qev": {
+      "capability": 55.2254280950681,
+      "intelligence": 30.65533681345476,
+      "calibration": 79.79551937668143,
+      "accuracy_choice": 54.66893039049236,
+      "accuracy_noul": 72.01365187713311,
+      "accuracy_score": 46.42857142857143,
+      "competence_choice": 38.222840074754956,
+      "competence_noul": 41.70912309476255,
+      "competence_score": 12.034047270846784,
+      "calibration_choice": 72.65298665998611,
+      "calibration_noul": 83.14447487553069,
+      "calibration_score": 83.58909659452749,
+      "nll": 1.0136406795238655,
+      "brier": 0.5473102962520704,
+      "coverage": 100.0,
+      "tvd": 0.23355981336292184
+    },
+    "valen": {
+      "capability": 62.12119240063135,
+      "intelligence": 48.67466254601851,
+      "calibration": 75.56772225524419,
+      "accuracy_choice": 69.5246179966044,
+      "accuracy_noul": 79.01023890784982,
+      "accuracy_score": 61.904761904761905,
+      "competence_choice": 59.86513396252651,
+      "competence_noul": 52.61422165787072,
+      "competence_score": 33.544632017658316,
+      "calibration_choice": 54.56287049154762,
+      "calibration_noul": 84.51601702575657,
+      "calibration_score": 87.62427924842842,
+      "nll": 0.79404578153493,
+      "brier": 0.41190310559158755,
+      "coverage": 100.0,
+      "tvd": 0.22108975927815855
+    },
+    "delta_qev_minus_valen": {
+      "capability": -6.8957643055632545,
+      "intelligence": -18.01932573256375,
+      "calibration": 4.227797121437234,
+      "accuracy_choice": -14.855687606112042,
+      "accuracy_noul": -6.996587030716711,
+      "accuracy_score": -15.476190476190474,
+      "competence_choice": -21.64229388777155,
+      "competence_noul": -10.905098563108169,
+      "competence_score": -21.51058474681153,
+      "calibration_choice": 18.09011616843849,
+      "calibration_noul": -1.3715421502258778,
+      "calibration_score": -4.035182653900932,
+      "nll": 0.2195948979889355,
+      "brier": 0.13540719066048285,
+      "coverage": 0.0,
+      "tvd": 0.012470054084763288
+    }
+  },
+  "paired_family_cluster_95_ci": {
+    "capability": {
+      "valid_draws": 5000,
+      "lower_95": -12.634518589666678,
+      "upper_95": -2.6182982990297856
+    },
+    "intelligence": {
+      "valid_draws": 5000,
+      "lower_95": -23.731124475948477,
+      "upper_95": -11.230963031088484
+    },
+    "calibration": {
+      "valid_draws": 5000,
+      "lower_95": -2.2328589154559446,
+      "upper_95": 6.980027280022323
+    },
+    "accuracy_choice": {
+      "valid_draws": 5000,
+      "lower_95": -18.34014878960285,
+      "upper_95": -10.290868804026708
+    },
+    "accuracy_noul": {
+      "valid_draws": 5000,
+      "lower_95": -12.168920870966751,
+      "upper_95": -1.5547619047619177
+    },
+    "accuracy_score": {
+      "valid_draws": 5000,
+      "lower_95": -22.75493567320804,
+      "upper_95": -10.51339533785286
+    },
+    "competence_choice": {
+      "valid_draws": 5000,
+      "lower_95": -26.234048401667497,
+      "upper_95": -14.910812747413537
+    },
+    "competence_noul": {
+      "valid_draws": 5000,
+      "lower_95": -21.786658623626455,
+      "upper_95": 0.2559037700318613
+    },
+    "competence_score": {
+      "valid_draws": 5000,
+      "lower_95": -26.944030847569564,
+      "upper_95": -15.229712227517483
+    },
+    "calibration_choice": {
+      "valid_draws": 5000,
+      "lower_95": 8.179876749781696,
+      "upper_95": 26.817017094850264
+    },
+    "calibration_noul": {
+      "valid_draws": 5000,
+      "lower_95": -12.730736641705205,
+      "upper_95": 4.422407275056781
+    },
+    "calibration_score": {
+      "valid_draws": 5000,
+      "lower_95": -11.114922113713892,
+      "upper_95": 0.5235267964330483
+    },
+    "nll": {
+      "valid_draws": 5000,
+      "lower_95": 0.13620718766782627,
+      "upper_95": 0.2725403815667547
+    },
+    "brier": {
+      "valid_draws": 5000,
+      "lower_95": 0.08860992052667044,
+      "upper_95": 0.16863258264340975
+    },
+    "coverage": {
+      "valid_draws": 5000,
+      "lower_95": 0.0,
+      "upper_95": 0.0
+    },
+    "tvd": {
+      "valid_draws": 4449,
+      "lower_95": -0.055159120263062356,
+      "upper_95": 0.03765112963980494
+    }
+  }
+}
