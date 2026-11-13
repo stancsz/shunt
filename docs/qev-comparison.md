@@ -33,7 +33,7 @@ Snapshot: 13 November 2026. Qev's [OpenDecisions](https://huggingface.co/dataset
 | [StartLux 1.1 4B Instant](https://huggingface.co/startlux-models/StartLux-Decision-v1.1-4B-Instant) | Qwen3.5-4B | 82.2 | — | — | 16.22 points above Qev; 19.73% relative gap |
 | [Kev 4B](https://huggingface.co/jaredpalmer/kev-4b) | Qwen3.5-4B-Base | Not verified | 74.46% | 65.70%† | Local bf16 diagnostics; public-231 6.06 points and typed-decisions 1.20 points above Qev 1.0 |
 | Qev 1.0 4B, experimental 4,096-token inference | Qwen3.5-4B | — | 75.32% | — | Same weights; long-context diagnostic, not released default |
-| [Jeff 1.1 Qwen 4B](https://huggingface.co/jgeuter/Jeff-1.1-Qwen-4B) | Qwen3.5-4B | 79.3 | — | — | 13.32 points above Qev |
+| [Jeff 1.1 Qwen 4B](https://huggingface.co/jgeuter/Jeff-1.1-Qwen-4B) | Qwen3.5-4B | 79.35 local | — | 83.87% / 88.40% / 73.81% | 13.25 Capability points above the Qev local recheck; broader local profile below |
 | [Wald 4B v2.0](https://huggingface.co/datasets/jgeuter/OpenDecisions/blob/main/README.md) | Qwen3.5-4B | 77.1 | — | — | 11.12 points above Qev; some questions use reasoning |
 | [Torchcast decision 4B v1.1](https://huggingface.co/datasets/jgeuter/OpenDecisions/blob/main/README.md) | Qwen3.5-4B | 73.5 | — | — | 7.52 points above Qev |
 | [decider 4B v2](https://huggingface.co/datasets/jgeuter/OpenDecisions/blob/main/README.md) | Qwen3.5-4B | 70.8 | — | — | 4.82 points above Qev |
@@ -43,6 +43,25 @@ Snapshot: 13 November 2026. Qev's [OpenDecisions](https://huggingface.co/dataset
 | [nanohunch decider 4B](https://huggingface.co/ubermenchh/nanohunch-decider-4b) | Qwen3-4B | 57.1 | — | — | 8.88 points below Qev; four-seed mean, different Qwen generation |
 
 The 82.2 and 79.3 results are reported in [Jeff 1.1's same-set evaluation table](https://huggingface.co/jgeuter/Jeff-1.1-Qwen-27B). The [OpenDecisions leaderboard](https://huggingface.co/datasets/jgeuter/OpenDecisions/blob/main/README.md) reports 67.7 for Jeff 1.0, versus 68.0 on its model card. Different service configurations can affect results; differences around two points should not be treated as decisive. Our 4B target against the identified 82.2 reference is at least **78.09 Capability** (95% of 82.2); Qev 1.0 does not meet it. This is a provisional validation target, not proof of generalization. Kev's local 0.8B result gives a provisional 95%-of-reference target of **56.19 Capability**; the experimental pilot at 50.45 falls 5.73 points short using unrounded scores. The local Valen 2B result gives a provisional 95%-of-reference target of **59.02 Capability**; Qev 1.0 at 55.23 is 3.79 points short. None of these references is established as global same-size SOTA.
+
+### 4B all-around local OpenDecisions profile: Qev vs Jeff 1.1
+
+Both models were locally scored on the same 2,352 OpenDecisions 1.0.1 rows (dataset SHA-256 `78614972006c5e5efbbfc121ce31e15cf576ef6c0cdf24a229b33d34d2bfcda6`). These are model-specific native pipelines, not a prompt-matched experiment. Jeff's run reproduces its reported 79.3/68.4/90.2 Capability/Intelligence/Calibration within rounding. Qev's checkpoint recheck produced 66.09 Capability versus 65.98 in the card's earlier run.
+
+| Metric | Qev 1.0 4B local recheck | Jeff 1.1 Qwen 4B local | Better observed value |
+| --- | ---: | ---: | --- |
+| Capability / Intelligence / Calibration | 66.09 / 44.70 / 87.49 | 79.35 / 68.46 / 90.23 | Jeff / Jeff / Jeff |
+| Choice / Noul / Score accuracy | 68.34% / 77.13% / 56.46% | 83.87% / 88.40% / 73.81% | Jeff / Jeff / Jeff |
+| Choice / Noul / Score competence | 59.23 / 49.39 / 25.48 | 79.57 / 74.55 / 51.25 | Jeff / Jeff / Jeff |
+| Choice / Noul / Score calibration | 80.70 / 91.71 / 90.05 | 88.67 / 92.40 / 89.63 | Jeff / Jeff / Qev |
+| Calibration-target TVD (129 rows; lower is better) | 0.18760 | 0.08092 | Jeff |
+| Hard-label NLL / multiclass Brier sum (lower is better) | 0.79124 / 0.43067 | 0.48293 / 0.25889 | Jeff / Jeff |
+| Top-label ECE, 10 bins (lower is better) | 0.02177 | 0.03816 | Qev |
+| Coverage / refusals | 100% / 0 | 100% / 0 | Tie |
+| Native batch-1 wall latency p50 / p95 | 132 / 666 ms | 95 / 191 ms | Jeff† |
+| Peak GPU allocated / reserved | 10.25 / 12.08 GB | 9.21 / 10.70 GB | Jeff† |
+
+†Latency and memory reflect different native model protocols and are descriptive, not controlled serving comparisons. Qev used one candidate prompt per option and one global temperature; Jeff used its official typed API and type-specific temperatures. Both used CUDA bf16 backbones and the same GPU; prompt rendering, input limits, head and serving implementations differ. Hard-label NLL/Brier/ECE are supplementary diagnostics. A 5,000-draw paired family-cluster bootstrap gives Qev-minus-Jeff Capability −13.25 points (95% CI −18.96 to −10.44), Intelligence −23.76 (−31.83 to −19.46), and Calibration −2.75 (−9.47 to +1.22). Accuracy differences are Choice −15.53 pp (−23.67 to −11.57), Noul −11.26 pp (−18.13 to −6.58), Score −17.35 pp (−26.06 to −12.47). For supplementary paired metrics, Qev-minus-Jeff NLL is +0.308 (+0.255 to +0.403), Brier +0.172 (+0.145 to +0.222), ECE −0.016 (−0.030 to +0.020; interval includes zero), and calibration-target TVD +0.107 (+0.106 to +0.107). The TVD interval is conditional on bootstrap samples containing calibration-target items; it is not uncertainty over the full benchmark population. Full intervals, seeds, model-specific diagnostics, hashes and method are recorded in `tmp/qev-sota/opendecisions-qev-jeff-4b-paired-bootstrap-v1.json` and reproducible with `tmp/qev-sota/bootstrap_qev_jeff_opendecisions.py`. This is uncertainty within benchmark families, not independent generalization evidence. OpenDecisions is public development data; Jeff's card says the benchmark informed training-length selection. These results cannot establish unseen-task generalization or causal training effects. Full pinned-revision receipts and per-family results are in `tmp/qev-sota/opendecisions-qev-1.0-4b-profile-v1.json` and `tmp/qev-sota/opendecisions-jeff-1.1-qwen-4b-v1.json`.
 
 The 2B OpenDecisions comparison uses 2,352 identical inputs and the published scorer: Valen's local run scored 62.12 Capability (48.67 Intelligence, 75.57 Calibration) versus Qev's 55.23 Capability, an 11.10% relative gap. Valen's current local weights match its pinned Hub revision after the run; hashes were not captured at both run boundaries. The native request renderings differ, Valen's model card says its training data is not public, and source overlap and scorer parity remain unverified. This is a public development comparison, not independent generalization evidence.
 
