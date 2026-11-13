@@ -1,6 +1,6 @@
 # Qev 1.0: comparison with same-size decision models
 
-Snapshot: 13 November 2026. Qev's [OpenDecisions](https://huggingface.co/datasets/jgeuter/OpenDecisions) results use a 2,352-item development set, not a fresh independent test. Capability averages the benchmark's intelligence and calibration scores; it is not accuracy. Public-231 accuracy is a separate local diagnostic detailed below. Unless marked local, competitor scores are reported by their authors or the benchmark authors using their own serving configurations. Tables list identified comparators, not a complete ranking or proof of global state of the art. Different benchmarks cannot be subtracted.
+Snapshot: 13 November 2026. Qev's [OpenDecisions](https://huggingface.co/datasets/jgeuter/OpenDecisions) results use a 2,352-item development set, not a fresh independent test. Capability averages the benchmark's intelligence and calibration scores; it is not accuracy. Public-231 accuracy is a separate local diagnostic detailed below. Unless marked local, competitor scores are reported by their authors or the benchmark authors using their own serving configurations. Tables list identified comparators, not a complete ranking or proof of global state of the art. Different benchmarks cannot be subtracted. The current training milestone is at least 98% of the strongest qualifying same-size peer on every benchmark (a relative gap no larger than 2%, not two percentage points). The target matrix below uses the strongest peer measured on that suite in this snapshot; newer or unscored peer results still need the same-suite evaluation before a SOTA claim.
 
 ## 0.8B
 
@@ -42,7 +42,35 @@ Snapshot: 13 November 2026. Qev's [OpenDecisions](https://huggingface.co/dataset
 | [Qev 1.0 4B](https://huggingface.co/ba-research/Qev1.0-Qwen3.5-4B) | Qwen3.5-4B | 65.98 | 68.40% | 64.50%† | Typed peer Kev 65.70%: Qev −1.83% relative (−1.20 pp; paired 95% cluster interval −3.20 to +0.75 pp) |
 | [nanohunch decider 4B](https://huggingface.co/ubermenchh/nanohunch-decider-4b) | Qwen3-4B | 57.1 | — | — | 8.88 points below Qev; four-seed mean, different Qwen generation |
 
-The 82.2 and 79.3 results are reported in [Jeff 1.1's same-set evaluation table](https://huggingface.co/jgeuter/Jeff-1.1-Qwen-27B). The [OpenDecisions leaderboard](https://huggingface.co/datasets/jgeuter/OpenDecisions/blob/main/README.md) reports 67.7 for Jeff 1.0, versus 68.0 on its model card. Different service configurations can affect results; differences around two points should not be treated as decisive. Our 4B target against the identified 82.2 reference is at least **78.09 Capability** (95% of 82.2); Qev 1.0 does not meet it. This is a provisional validation target, not proof of generalization. Kev's local 0.8B result gives a provisional 95%-of-reference target of **56.19 Capability**; the experimental pilot at 50.45 falls 5.73 points short using unrounded scores. The local Valen 2B result gives a provisional 95%-of-reference target of **59.02 Capability**; Qev 1.0 at 55.23 is 3.79 points short. None of these references is established as global same-size SOTA.
+The 82.2 and 79.3 results are reported in [Jeff 1.1's same-set evaluation table](https://huggingface.co/jgeuter/Jeff-1.1-Qwen-27B). The [OpenDecisions leaderboard](https://huggingface.co/datasets/jgeuter/OpenDecisions/blob/main/README.md) reports 67.7 for Jeff 1.0, versus 68.0 on its model card. Different service configurations can affect results; differences around two points should not be treated as decisive. On the snapshot references, 4B requires at least **80.56 Capability** (98% of 82.2); Qev 1.0 is 14.58 points below this target. The 0.8B and 2B OpenDecisions thresholds are **57.96** (98% of Kev's 59.14; Qev 1.0 is 11.11 points below) and **60.88** (98% of Valen's 62.12; Qev 1.0 is 5.65 points below). These are provisional snapshot thresholds, not proof of generalization or global SOTA.
+
+## Current 2% target matrix
+
+These per-suite targets use the strongest identified same-size score in the preceding tables. “Qev minus target” is a raw score difference (Capability points or accuracy percentage points); relative gaps and scorer caveats remain in the comparison above and below. A positive value means the point estimate reaches the 98% threshold, not that Qev's generalization or broad quality has been accepted.
+
+### 0.8B
+
+| Benchmark | Qev 1.0 | Peer used for target | Peer score | 98% peer target | Qev minus target |
+| --- | ---: | --- | ---: | ---: | ---: |
+| OpenDecisions Capability (development) | 46.85 | Kev 0.8B | 59.14 | 57.96 | −11.11 points |
+| Public-231 accuracy | 56.28% | Kev 0.8B | 63.20% | 61.94% | −5.66 pp |
+| Typed-Decisions accuracy | 43.50% | Kev 0.8B | 44.15% | 43.27% | +0.23 pp |
+
+### 2B
+
+| Benchmark | Qev 1.0 | Peer used for target | Peer score | 98% peer target | Qev minus target |
+| --- | ---: | --- | ---: | ---: | ---: |
+| OpenDecisions Capability (development) | 55.23 | Valen Decision 1.5 2B | 62.12 | 60.88 | −5.65 points |
+| Public-231 accuracy | 63.64% | Valen Decision 1.5 2B | 81.39% | 79.76% | −16.12 pp |
+| Typed-Decisions accuracy | 56.10% | Valen Decision 1.5 2B | 69.15% | 67.77% | −11.67 pp |
+
+### 4B
+
+| Benchmark | Qev 1.0 | Peer used for target | Peer score | 98% peer target | Qev minus target |
+| --- | ---: | --- | ---: | ---: | ---: |
+| OpenDecisions Capability (development) | 65.98 | StartLux 1.1 4B Instant | 82.20 | 80.56 | −14.58 points |
+| Public-231 accuracy | 68.40% | Kev 4B | 74.46% | 72.97% | −4.57 pp |
+| Typed-Decisions accuracy | 64.50% | Kev 4B | 65.70% | 64.39% | +0.11 pp |
 
 ### 4B all-around local OpenDecisions profile: Qev vs Jeff 1.1
 
@@ -140,8 +168,9 @@ This adds a locally reproduced task-family-matched reference alongside the stron
 
 Popularity is reported independently from measured performance. In the same Hub snapshot, StartLux 0.8B/2B/4B Instant had 1,908/1,071/2,219 downloads, and Valen Decision 1.5 2B had 161. These are monthly Hub download counts, not unique users, quality measurements, or proof of benchmark strength. Decider 2B is the only high-adoption peer measured on this suite so far. Kev 0.8B/4B and StartLux 2B/4B remain unevaluated here. StartLux 0.8B's official Transformers backend was attempted with its required bidirectional attention: CUDA inference stopped because this Windows Torch build had no supported fused kernel, while the official backend refuses the slower quadratic CUDA math fallback. The supported CPU reference path passed the publisher's bidirectional integrity checks and returned normalized probabilities on three long prompts, but took 12.7–14.3 seconds per item; this is not a benchmark score and projects to roughly 6.3 hours for 1,710 items. No compatibility shim or causal-mode substitution was used. Its same-suite metrics remain unknown.
 
-The FLock reference uses its official single-pass TypedDecider scorer, bf16 and temperature 1.0. Decider 2B uses its native `Decider.decide` scorer, bf16 and its stored temperature. Qev scores each option separately and uses separately fitted temperatures, so probability and latency comparisons reflect both model quality and serving/scoring differences. Against Decider 2B, Qev 2B reaches only 80.06% of the peer's accuracy, below the 95% target and 5.92 pp below the 37.61% acceptance threshold; NLL, Brier and corrected ECE are also worse. A 50,000-replicate family-cluster bootstrap CI for Decider's accuracy gain is +3.10 to +12.81 pp. Decider beat Qev on 14 of 19 families, tied one and lost four. This remains one public diagnostic, not independent generalization. The 1.88B FLock model's overlap with the benchmark's 112 rule structures is unverified, and it is not popular. Newer FLock 1.2 is excluded because its card declares this exact dataset as training data.
+The FLock reference uses its official single-pass TypedDecider scorer, bf16 and temperature 1.0. Decider 2B uses its native `Decider.decide` scorer, bf16 and its stored temperature. Qev scores each option separately and uses separately fitted temperatures, so probability and latency comparisons reflect both model quality and serving/scoring differences. Against Decider 2B, Qev 2B reaches only 80.06% of the peer's accuracy, below the 98% target and 7.10 pp below the 38.80% acceptance threshold; NLL, Brier and corrected ECE are also worse. A 50,000-replicate family-cluster bootstrap CI for Decider's accuracy gain is +3.10 to +12.81 pp. Decider beat Qev on 14 of 19 families, tied one and lost four. This remains one public diagnostic, not independent generalization. The 1.88B FLock model's overlap with the benchmark's 112 rule structures is unverified, and it is not popular. Newer FLock 1.2 is excluded because its card declares this exact dataset as training data.
 
 **ECE correction:** the first local peer report omitted bin-occupancy weighting and understated peer ECE. Correct ECE was recomputed from saved row-level probability vectors using the same occupancy-weighted 15-bin top-label formula as Qev's evaluator. FLock 1.1's ECE is 0.06891 (previously 0.00075); Decider 2B's is 0.13571 (previously 0.00109). Qev's recorded values were independently recomputed and are unchanged. Accuracy, NLL and Brier did not change.
 
 The comparison protocol and hashes are recorded in [`docs/qev-sota-goal.md`](qev-sota-goal.md#2026-11-13-local-reproduction-flock-this-that-11-diagnostic), with full local outputs in `tmp/qev-sota/this-that-decision-bench-v1/`. The next comparison step is to run the strongest runnable popular peers on each of at least three source-separated suites under frozen scoring and serving settings, then report a predeclared profile across accuracy, probability quality, coverage, selective risk, robustness, and efficiency. No tuning or training on public leaderboard items.
+
