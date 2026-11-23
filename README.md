@@ -7,7 +7,7 @@
 
 Shunt is a **local coding-task router** that recommends which of three model tiers should handle a request. It uses a small LoRA adapter on **Qwen/Qwen3.5-0.8B** to score task complexity, then applies rules for scope, risk, ambiguity, and retries. Your application receives the recommendation and chooses what to do next.
 
-[Unpublished research draft (PDF)](paper/main.pdf) · [LaTeX source](paper/main.tex) · [Product and research values](#product-and-research-values)
+[Official site](https://stancsz.github.io/shunt/) · [Market position and maturity](docs/market-position.md) · [Unpublished research draft (PDF)](paper/main.pdf) · [LaTeX source](paper/main.tex) · [Product and research values](#product-and-research-values)
 
 - **Local inference:** Runs on a CUDA GPU with a locally trained adapter.
 - **Three configurable tiers:** Route routine work to `T1`, standard work to `T2`, and complex or high-risk work to `T3`.
