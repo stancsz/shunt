@@ -7,6 +7,8 @@
 
 Shunt is a **local coding-task router** that recommends which of three model tiers should handle a request. It uses a small LoRA adapter on **Qwen/Qwen3.5-0.8B** to score task complexity, then applies rules for scope, risk, ambiguity, and retries. Your application receives the recommendation and chooses what to do next.
 
+[Unpublished research draft (PDF)](paper/main.pdf) · [LaTeX source](paper/main.tex) · [Product and research values](#product-and-research-values)
+
 - **Local inference:** Runs on a CUDA GPU with a locally trained adapter.
 - **Three configurable tiers:** Route routine work to `T1`, standard work to `T2`, and complex or high-risk work to `T3`.
 - **Seven API formats:** Hugging Face, vLLM, Open Inference Protocol, OPA decisions, Jev System One, OpenAI Chat Completions, and Anthropic Messages. [See contracts and SDK examples](docs/api.md).
@@ -157,3 +159,14 @@ Optional evaluation, benchmarking, and tests:
 Training uses authored synthetic policy labels. The validation set holds out intent templates; it does not prove routing quality on real coding tasks or the relative success rates of the execution targets. Probabilities are uncalibrated. The 30 ms p95 latency criterion remains a target until verified.
 
 The public repository includes the training and validation data and the reviewed policy fixtures. Exploratory candidate datasets and their research-only scripts are kept outside the public checkout; some include third-party issue text with redistribution rights still under review.
+
+## Product and research values
+
+Shunt is a local, recommend-only router for coding tasks. It scores a request and applies explicit policy rules; the calling application decides what happens next.
+
+- **Decision/execution separation:** Shunt returns a tier recommendation and does not invoke target models.
+- **Inspectable policy:** scope, risk, ambiguity, and retry rules are separate from the learned score.
+- **Prototype evidence:** 34/36 versus 24/36 on one held-out synthetic set; 16.19 ms p95 on one warm fixture run.
+- **Bounded claims:** probabilities are uncalibrated; generalization, downstream success, savings, and production readiness are not established.
+
+[Unpublished research draft (PDF)](paper/main.pdf) · [LaTeX source](paper/main.tex). Not submitted to arXiv; no identifier is claimed.

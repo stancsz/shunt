@@ -1,0 +1,30 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{microtype}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\title{A Recommend-Only Neural Router for Local Coding Tasks\\\large Prototype architecture, synthetic held-out results, and evaluation boundaries}
+\author{Stan Chen}
+\date{23 November 2026\\[4pt]\small Unpublished working draft; not submitted to arXiv}
+\begin{document}
+\maketitle
+\begin{center}\small This draft has no arXiv identifier. Claims are limited to the evidence described below.\end{center}
+\begin{abstract}
+Shunt is a local coding-task router that recommends one of three configurable model tiers. A Qwen3.5-0.8B base model with a LoRA adapter scores task-complexity labels, while deterministic policy rules apply scope, risk, ambiguity, and retry handling. The router returns a recommendation and does not invoke the downstream execution model. In a bounded held-out synthetic prompt set, the trained adapter scored 34 of 36 compared with 24 of 36 for the frozen base. A warm CUDA-graph run measured 16.19 ms p95 over 1,000 fixture calls. These prototype measurements do not establish generalization, calibrated probabilities, cost reduction, downstream success, or production readiness.
+\end{abstract}
+\section{Motivation and scope}
+Routing systems can reserve stronger models \cite{r1} for requests that appear difficult, risky, or ambiguous, but poor recommendations can reduce task quality and retries can offset savings. Shunt explores local classification and policy for coding requests.\par
+This report covers recommendation only. Shunt does not call execution models, so recommendation accuracy is not downstream code quality or accepted task completion.\par
+\section{Architecture and evidence}
+The learned component scores three label tokens using a Qwen3.5-0.8B base with LoRA. A separate deterministic policy applies scope floors, risk overrides, ambiguity promotion, and retry escalation. The final recommendation maps to one of three configurable tiers. The API exposes seven wire formats. Probabilities are uncalibrated.\par
+Repository evidence \cite{r2} reports that the held-out synthetic set scored 34/36 for the trained adapter versus 24/36 for the frozen base. This is a small-sample prototype result, not evidence of robustness to natural coding requests or distribution shift. A warm CUDA-graph measurement was 16.19 ms p95 over 1,000 fixture calls.\par
+\section{Limits and next work}
+A broader 512-token run reported 25.41 ms p95 total, with separately summarized 22.98 ms inference and 2.87 ms static-processing p95. Component percentiles need not sum to total percentiles.\par
+Future work needs representative held-out coding tasks, repository context, annotator agreement, calibration, accepted-task outcomes, human review time, latency, and cost. Current results do not establish production readiness.\par
+\section{Conclusion}
+Shunt separates learned scoring from deterministic routing and returns recommendations without invoking target models. End-to-end workload evaluation is needed to establish utility.\par
+\begin{thebibliography}{99}
+\bibitem{r1} Hu, Y., et al. RouterBench: A Benchmark for Multi-LLM Routing System. 2024. \url{https://arxiv.org/abs/2403.12031}
+\bibitem{r2} Chen, S. Shunt repository. \url{https://github.com/stancsz/shunt}
+\end{thebibliography}
+\end{document}
